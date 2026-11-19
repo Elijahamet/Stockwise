@@ -47,6 +47,7 @@ export default function ProfileScreen() {
     settings,
     currentTheme,
     setAppTheme,
+    setIsOnboarded,
   } = useApp();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [appliedNotice, setAppliedNotice] = useState<string | null>(null);
@@ -63,7 +64,8 @@ export default function ProfileScreen() {
 
   const handleLogout = () => {
     setShowLogoutModal(false);
-    router.replace('/auth/login');
+    setIsOnboarded(false);
+    router.replace('/onboarding/welcome');
   };
 
   return (
