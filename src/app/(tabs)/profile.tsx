@@ -26,18 +26,40 @@ import {
   Sparkles,
   ArrowRight,
   FileText,
+  Palette,
+  Check,
+  CheckCircle2,
 } from 'lucide-react-native';
 import { Colors } from '../../constants/colors';
 import { BorderRadius, Spacing, Typography, Shadows } from '../../constants/theme';
 import { useApp } from '../../context/AppContext';
 import { ConfirmModal } from '../../components/modals/ConfirmModal';
+import { THEME_LIST, THEME_PRESETS } from '../../constants/themePresets';
+import { AppThemeId } from '../../types';
 
 export default function ProfileScreen() {
-  const { user, business, employees, notifications, syncState, settings } = useApp();
+  const {
+    user,
+    business,
+    employees,
+    notifications,
+    syncState,
+    settings,
+    currentTheme,
+    setAppTheme,
+  } = useApp();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [appliedNotice, setAppliedNotice] = useState<string | null>(null);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
   const isOnline = syncState.connectionStatus === 'online';
+
+  const handleSelectTheme = (themeId: AppThemeId) => {
+    setAppTheme(themeId);
+    const target = THEME_PRESETS[themeId];
+    setAppliedNotice(target ? `${target.name} applied!` : 'Theme updated!');
+    setTimeout(() => setAppliedNotice(null), 2500);
+  };
 
   const handleLogout = () => {
     setShowLogoutModal(false);
@@ -52,10 +74,10 @@ export default function ProfileScreen() {
       >
         {/* Profile & Business Hero Card with Rich Gradient */}
         <LinearGradient
-          colors={['#0A241D', '#0F332A', '#16986C']}
+          colors={currentTheme?.colors?.primaryGradient || ['#0A241D', '#0F332A', '#16986C']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={styles.heroCard}
+          style={[styles.heroCard, currentTheme?.isGlass && styles.heroCardGlass]}
         >
           <View style={styles.heroTopRow}>
             <View style={styles.avatarWrap}>
@@ -233,11 +255,161 @@ export default function ProfileScreen() {
           </View>
         </View>
 
+        {/* SECTION: THEME & DISPLAY APPEARANCE (6 THEMES INCL. iOS 27 GLASS UI) */}
+        <View style={styles.sectionContainer}>
+          <View style={styles.sectionHeaderRow}>
+            <Text style={styles.microSectionLabel}>THEME & DISPLAY APPEARANCE</Text>
+            <View style={styles.activeThemeIndicator}>
+              <Sparkles size={12} color={currentTheme?.colors?.accent || Colors.freshGreen} />
+              <Text
+                style={[
+                  styles.activeThemeIndicatorText,
+                  { color: currentTheme?.colors?.accent || Colors.deepEmerald },
+                ]}
+              >
+                {currentTheme?.name || 'Classic Emerald'}
+              </Text>
+            </View>
+          </View>
+
+          {/* Applied Notice Banner */}
+          {appliedNotice && (
+            <View style={styles.themeAppliedToast}>
+              <CheckCircle2 size={16} color={Colors.freshGreen} />
+              <Text style={styles.themeAppliedToastText}>{appliedNotice}</Text>
+            </View>
+          )}
+
+          {/* 6 Themes Carousel Cards */}
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.themeCarousel}
+          >
+            {THEME_LIST.map((item) => {
+              const isSelected = (settings.activeTheme || 'emerald') === item.id;
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  style={[
+                    styles.themeCard,
+                    isSelected && styles.themeCardActive,
+                    item.isGlass && styles.themeCardGlass,
+                  ]}
+                  onPress={() => handleSelectTheme(item.id)}
+                  activeOpacity={0.8}
+                >
+                  {/* Subtle glass reflection glow for iOS 27 theme */}
+                  {item.isGlass && (
+                    <LinearGradient
+                      colors={['rgba(44, 229, 167, 0.22)', 'rgba(8, 30, 24, 0.75)']}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 1 }}
+                      style={styles.glassCardGlow}
+                    />
+                  )}
+
+                  <View style={styles.themeCardTop}>
+                    {/* Color Swatch Dots */}
+                    <View style={styles.swatchRow}>
+                      {item.previewColors.map((color, idx) => (
+                        <View
+                          key={idx}
+                          style={[styles.swatchDot, { backgroundColor: color }]}
+                        />
+                      ))}
+                    </View>
+
+                    {/* Badge */}
+                    {item.badge && (
+                      <View
+                        style={[
+                          styles.themeBadge,
+                          item.isGlass
+                            ? styles.glassThemeBadge
+                            : item.isDark
+                            ? styles.darkThemeBadge
+                            : styles.lightThemeBadge,
+                        ]}
+                      >
+                        <Text
+                          style={[
+                            styles.themeBadgeText,
+                            item.isGlass
+                              ? styles.glassThemeBadgeText
+                              : item.isDark
+                              ? styles.darkThemeBadgeText
+                              : styles.lightThemeBadgeText,
+                          ]}
+                        >
+                          {item.badge}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+
+                  <View style={styles.themeCardInfo}>
+                    <Text
+                      style={[
+                        styles.themeCardName,
+                        (item.isDark || item.isGlass) && styles.whiteText,
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {item.name}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.themeCardTagline,
+                        (item.isDark || item.isGlass) && styles.slateText,
+                      ]}
+                      numberOfLines={2}
+                    >
+                      {item.tagline}
+                    </Text>
+                  </View>
+
+                  {/* Active vs Tap Status */}
+                  <View style={styles.themeCardFooter}>
+                    {isSelected ? (
+                      <View style={styles.activeCheckPill}>
+                        <Check size={11} color={Colors.white} />
+                        <Text style={styles.activeCheckPillText}>Active Theme</Text>
+                      </View>
+                    ) : (
+                      <View style={styles.tapPill}>
+                        <Text style={styles.tapPillText}>Tap to Apply</Text>
+                      </View>
+                    )}
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+        </View>
+
         {/* SECTION 2: APP PREFERENCES */}
         <View style={styles.sectionContainer}>
           <Text style={styles.microSectionLabel}>PREFERENCES & SECURITY</Text>
 
           <View style={styles.menuGroup}>
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={() => router.push('/settings/theme')}
+              activeOpacity={0.7}
+            >
+              <View style={[styles.menuIconWrap, { backgroundColor: Colors.softBackground }]}>
+                <Palette size={18} color={Colors.deepEmerald} />
+              </View>
+              <View style={styles.menuTexts}>
+                <Text style={styles.menuTitle}>Theme & Appearance</Text>
+                <Text style={styles.menuSub}>{currentTheme?.name || 'Classic Emerald'} (6 Themes)</Text>
+              </View>
+              <ChevronRight size={18} color={Colors.textLight} />
+            </TouchableOpacity>
+
+            <View style={styles.menuDivider} />
+
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => router.push('/settings/currency')}
@@ -588,5 +760,184 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: Colors.textLight,
     marginTop: Spacing.xs,
+  },
+  heroCardGlass: {
+    borderColor: 'rgba(44, 229, 167, 0.65)',
+    shadowColor: '#2CE5A7',
+    shadowOpacity: 0.45,
+    shadowRadius: 22,
+    borderWidth: 1.5,
+  },
+  sectionHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: Spacing.xs,
+  },
+  activeThemeIndicator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: Colors.white,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: BorderRadius.full,
+    borderWidth: 1,
+    borderColor: Colors.borderLight,
+  },
+  activeThemeIndicatorText: {
+    fontSize: 10,
+    fontWeight: '800',
+  },
+  themeAppliedToast: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#E8F6F1',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: BorderRadius.md,
+    borderWidth: 1,
+    borderColor: Colors.freshGreen,
+    marginBottom: Spacing.xs,
+  },
+  themeAppliedToastText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: Colors.deepEmerald,
+  },
+  themeCarousel: {
+    flexDirection: 'row',
+    gap: Spacing.md,
+    paddingVertical: Spacing.xs,
+    paddingRight: Spacing.lg,
+  },
+  themeCard: {
+    width: 200,
+    backgroundColor: Colors.white,
+    borderRadius: BorderRadius.xl,
+    padding: Spacing.md,
+    borderWidth: 1.5,
+    borderColor: Colors.borderLight,
+    justifyContent: 'space-between',
+    minHeight: 155,
+    position: 'relative',
+    overflow: 'hidden',
+    ...Shadows.sm,
+  },
+  themeCardActive: {
+    borderColor: Colors.freshGreen,
+    backgroundColor: '#F3FAF7',
+    ...Shadows.md,
+  },
+  themeCardGlass: {
+    backgroundColor: '#081E18',
+    borderColor: 'rgba(44, 229, 167, 0.45)',
+  },
+  glassCardGlow: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  themeCardTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+  },
+  swatchRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  swatchDot: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.4)',
+  },
+  themeBadge: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: BorderRadius.xs,
+  },
+  glassThemeBadge: {
+    backgroundColor: 'rgba(44, 229, 167, 0.25)',
+    borderWidth: 1,
+    borderColor: '#2CE5A7',
+  },
+  darkThemeBadge: {
+    backgroundColor: '#1E293B',
+  },
+  lightThemeBadge: {
+    backgroundColor: Colors.surfaceSubtle,
+  },
+  themeBadgeText: {
+    fontSize: 8,
+    fontWeight: '800',
+    letterSpacing: 0.3,
+  },
+  glassThemeBadgeText: {
+    color: '#2CE5A7',
+  },
+  darkThemeBadgeText: {
+    color: '#38BDF8',
+  },
+  lightThemeBadgeText: {
+    color: Colors.textMuted,
+  },
+  themeCardInfo: {
+    flex: 1,
+    marginBottom: Spacing.sm,
+  },
+  themeCardName: {
+    fontSize: 13,
+    fontWeight: '800',
+    color: Colors.charcoal,
+    marginBottom: 2,
+  },
+  themeCardTagline: {
+    fontSize: 11,
+    color: Colors.textMuted,
+    lineHeight: 15,
+  },
+  whiteText: {
+    color: Colors.white,
+  },
+  slateText: {
+    color: '#94A3B8',
+  },
+  themeCardFooter: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  activeCheckPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: Colors.freshGreen,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: BorderRadius.full,
+  },
+  activeCheckPillText: {
+    fontSize: 10,
+    fontWeight: '800',
+    color: Colors.white,
+  },
+  tapPill: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.surfaceSubtle,
+  },
+  tapPillText: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: Colors.textMuted,
   },
 });

@@ -7,21 +7,27 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { Sun, Moon, Smartphone, Check, CheckCircle2 } from 'lucide-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Check, CheckCircle2, Sparkles, Layers, ShieldCheck } from 'lucide-react-native';
 import { Colors } from '../../constants/colors';
-import { BorderRadius, Spacing, Typography } from '../../constants/theme';
+import { BorderRadius, Spacing, Typography, Shadows } from '../../constants/theme';
 import { useApp } from '../../context/AppContext';
+import { THEME_LIST, THEME_PRESETS } from '../../constants/themePresets';
+import { AppThemeId } from '../../types';
 
 export default function ThemePreferencesScreen() {
-  const { settings, updateSettings } = useApp();
-  const [theme, setTheme] = useState<'light' | 'dark'>(settings.theme || 'light');
+  const { settings, currentTheme, setAppTheme } = useApp();
   const [isSaved, setIsSaved] = useState(false);
+  const [activeName, setActiveName] = useState<string>('');
 
-  const handleSelect = (selectedTheme: 'light' | 'dark') => {
-    setTheme(selectedTheme);
-    updateSettings({ theme: selectedTheme });
+  const currentThemeId = (settings.activeTheme || 'emerald') as AppThemeId;
+
+  const handleSelect = (themeId: AppThemeId) => {
+    setAppTheme(themeId);
+    const preset = THEME_PRESETS[themeId];
+    setActiveName(preset ? preset.name : 'Theme');
     setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 2000);
+    setTimeout(() => setIsSaved(false), 2500);
   };
 
   return (
@@ -33,57 +39,159 @@ export default function ThemePreferencesScreen() {
         {isSaved && (
           <View style={styles.successBanner}>
             <CheckCircle2 size={16} color={Colors.freshGreen} />
-            <Text style={styles.successText}>Theme appearance updated!</Text>
+            <Text style={styles.successText}>{activeName} theme applied across Stockwise!</Text>
           </View>
         )}
 
-        <View style={styles.headerBox}>
-          <Text style={styles.headerTitle}>Display Theme</Text>
-          <Text style={styles.headerSubtitle}>
-            Choose between daytime clarity or high-contrast night mode for your shop terminal.
+        {/* Current Active Preview Header Card */}
+        <LinearGradient
+          colors={currentTheme?.colors?.primaryGradient || ['#0A241D', '#0F332A', '#16986C']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={[styles.previewCard, currentTheme?.isGlass && styles.previewCardGlass]}
+        >
+          <View style={styles.previewTopRow}>
+            <View style={styles.previewBadge}>
+              <Sparkles size={13} color={Colors.white} />
+              <Text style={styles.previewBadgeText}>ACTIVE THEME</Text>
+            </View>
+            {currentTheme?.badge && (
+              <View style={styles.glassBadgePill}>
+                <Text style={styles.glassBadgePillText}>{currentTheme.badge}</Text>
+              </View>
+            )}
+          </View>
+
+          <Text style={styles.previewTitle}>{currentTheme?.name || 'Classic Emerald'}</Text>
+          <Text style={styles.previewTagline}>{currentTheme?.tagline || 'Signature Stockwise Design'}</Text>
+
+          <View style={styles.previewSwatchesRow}>
+            {currentTheme?.previewColors?.map((c, i) => (
+              <View key={i} style={[styles.previewSwatchBubble, { backgroundColor: c }]} />
+            ))}
+            <Text style={styles.previewHint}>Real-time synchronized across terminals</Text>
+          </View>
+        </LinearGradient>
+
+        <View style={styles.sectionHeading}>
+          <Text style={styles.sectionHeadingTitle}>SELECT APP APPEARANCE</Text>
+          <Text style={styles.sectionHeadingSubtitle}>
+            Choose from 6 professionally crafted themes, including the iOS 27 Liquid Glass experience.
           </Text>
         </View>
 
-        <View style={styles.themeListCard}>
-          {/* Light Theme */}
-          <TouchableOpacity
-            style={[styles.themeItem, theme === 'light' && styles.selectedItem]}
-            onPress={() => handleSelect('light')}
-            activeOpacity={0.7}
-          >
-            <View style={[styles.iconWrap, { backgroundColor: '#FFF9E6' }]}>
-              <Sun size={20} color={Colors.amberDark} />
-            </View>
+        {/* 6 Theme Selection Cards */}
+        <View style={styles.themeListWrap}>
+          {THEME_LIST.map((item, index) => {
+            const isSelected = currentThemeId === item.id;
+            const isLast = index === THEME_LIST.length - 1;
 
-            <View style={styles.themeInfo}>
-              <Text style={styles.themeName}>Light Emerald (Recommended)</Text>
-              <Text style={styles.themeDesc}>
-                Clean daylight interface with soft grey background and emerald brand accents.
-              </Text>
-            </View>
+            return (
+              <TouchableOpacity
+                key={item.id}
+                style={[
+                  styles.themeItem,
+                  isSelected && styles.selectedItem,
+                  item.isGlass && styles.glassThemeItem,
+                  isLast && { borderBottomWidth: 0 },
+                ]}
+                onPress={() => handleSelect(item.id)}
+                activeOpacity={0.7}
+              >
+                {/* Glow layer for iOS 27 */}
+                {item.isGlass && (
+                  <LinearGradient
+                    colors={['rgba(44, 229, 167, 0.12)', 'rgba(7, 26, 21, 0.3)']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={StyleSheet.absoluteFill}
+                  />
+                )}
 
-            {theme === 'light' && <Check size={20} color={Colors.freshGreen} />}
-          </TouchableOpacity>
+                <View style={styles.themeItemContent}>
+                  {/* Swatch & Icon Left */}
+                  <View style={styles.themeItemLeft}>
+                    <View style={styles.swatchStack}>
+                      {item.previewColors.map((color, idx) => (
+                        <View
+                          key={idx}
+                          style={[
+                            styles.stackedSwatch,
+                            { backgroundColor: color, left: idx * 10, zIndex: 3 - idx },
+                          ]}
+                        />
+                      ))}
+                    </View>
+                  </View>
 
-          {/* Dark Theme */}
-          <TouchableOpacity
-            style={[styles.themeItem, theme === 'dark' && styles.selectedItem, { borderBottomWidth: 0 }]}
-            onPress={() => handleSelect('dark')}
-            activeOpacity={0.7}
-          >
-            <View style={[styles.iconWrap, { backgroundColor: '#1A2421' }]}>
-              <Moon size={20} color={Colors.emeraldLight} />
-            </View>
+                  {/* Texts */}
+                  <View style={styles.themeInfo}>
+                    <View style={styles.themeNameRow}>
+                      <Text
+                        style={[
+                          styles.themeName,
+                          item.isGlass && styles.glassText,
+                          isSelected && styles.selectedText,
+                        ]}
+                      >
+                        {item.name}
+                      </Text>
+                      {item.badge && (
+                        <View
+                          style={[
+                            styles.badgePill,
+                            item.isGlass
+                              ? styles.badgeGlass
+                              : item.isDark
+                              ? styles.badgeDark
+                              : styles.badgeLight,
+                          ]}
+                        >
+                          <Text
+                            style={[
+                              styles.badgePillText,
+                              item.isGlass
+                                ? styles.badgeGlassText
+                                : item.isDark
+                                ? styles.badgeDarkText
+                                : styles.badgeLightText,
+                            ]}
+                          >
+                            {item.badge}
+                          </Text>
+                        </View>
+                      )}
+                    </View>
 
-            <View style={styles.themeInfo}>
-              <Text style={styles.themeName}>Dark Slate</Text>
-              <Text style={styles.themeDesc}>
-                Low-light dark theme to reduce battery draw and eye fatigue during late shifts.
-              </Text>
-            </View>
+                    <Text style={styles.themeTagline}>{item.tagline}</Text>
+                    <Text style={styles.themeDesc}>{item.description}</Text>
+                  </View>
 
-            {theme === 'dark' && <Check size={20} color={Colors.freshGreen} />}
-          </TouchableOpacity>
+                  {/* Check Indicator */}
+                  <View style={styles.checkWrap}>
+                    {isSelected ? (
+                      <View style={styles.activeCheckCircle}>
+                        <Check size={14} color={Colors.white} strokeWidth={3} />
+                      </View>
+                    ) : (
+                      <View style={styles.inactiveCircle} />
+                    )}
+                  </View>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        {/* Feature info footer */}
+        <View style={styles.footerInfoCard}>
+          <Layers size={18} color={Colors.emeraldDark} />
+          <View style={styles.footerInfoTexts}>
+            <Text style={styles.footerInfoTitle}>Persistent Cloud & Local Storage</Text>
+            <Text style={styles.footerInfoBody}>
+              Your chosen appearance preference is saved to device storage and immediately active across all tabs, cards, and scanner overlays.
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -113,63 +221,247 @@ const styles = StyleSheet.create({
   successText: {
     ...Typography.bodySmall,
     color: Colors.deepEmerald,
-    fontWeight: '600',
+    fontWeight: '700',
+    flex: 1,
   },
-  headerBox: {
-    backgroundColor: Colors.white,
+  previewCard: {
     borderRadius: BorderRadius.xl,
     padding: Spacing.lg,
+    ...Shadows.md,
+  },
+  previewCardGlass: {
+    borderWidth: 1.5,
+    borderColor: 'rgba(44, 229, 167, 0.45)',
+  },
+  previewTopRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: Spacing.sm,
+  },
+  previewBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.18)',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: BorderRadius.full,
+  },
+  previewBadgeText: {
+    fontSize: 10,
+    fontWeight: '800',
+    color: Colors.white,
+    letterSpacing: 0.8,
+  },
+  glassBadgePill: {
+    backgroundColor: 'rgba(44, 229, 167, 0.25)',
     borderWidth: 1,
-    borderColor: Colors.borderLight,
+    borderColor: 'rgba(44, 229, 167, 0.5)',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: BorderRadius.full,
   },
-  headerTitle: {
-    ...Typography.h4,
-    color: Colors.charcoal,
+  glassBadgePillText: {
+    fontSize: 10,
+    fontWeight: '800',
+    color: '#5EEAD4',
   },
-  headerSubtitle: {
+  previewTitle: {
+    ...Typography.h3,
+    color: Colors.white,
+    fontWeight: '800',
+  },
+  previewTagline: {
+    ...Typography.caption,
+    color: 'rgba(255, 255, 255, 0.85)',
+    marginTop: 2,
+    marginBottom: Spacing.md,
+  },
+  previewSwatchesRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    backgroundColor: 'rgba(0, 0, 0, 0.22)',
+    padding: Spacing.sm,
+    borderRadius: BorderRadius.md,
+  },
+  previewSwatchBubble: {
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.4)',
+  },
+  previewHint: {
+    fontSize: 11,
+    color: 'rgba(255, 255, 255, 0.75)',
+    marginLeft: 4,
+    flex: 1,
+  },
+  sectionHeading: {
+    marginTop: Spacing.xs,
+  },
+  sectionHeadingTitle: {
+    fontSize: 12,
+    fontWeight: '800',
+    color: Colors.deepEmerald,
+    letterSpacing: 0.8,
+  },
+  sectionHeadingSubtitle: {
     ...Typography.caption,
     color: Colors.textMuted,
     lineHeight: 18,
-    marginTop: 2,
+    marginTop: 3,
   },
-  themeListCard: {
+  themeListWrap: {
     backgroundColor: Colors.white,
     borderRadius: BorderRadius.xl,
     borderWidth: 1,
     borderColor: Colors.borderLight,
     overflow: 'hidden',
+    ...Shadows.sm,
   },
   themeItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
     padding: Spacing.lg,
     borderBottomWidth: 1,
     borderBottomColor: Colors.borderLight,
+    position: 'relative',
+  },
+  glassThemeItem: {
+    backgroundColor: '#0A2019',
   },
   selectedItem: {
-    backgroundColor: Colors.emeraldLight,
+    backgroundColor: '#F0FDF8',
   },
-  iconWrap: {
+  themeItemContent: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  themeItemLeft: {
     width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: 'center',
+    height: 36,
     justifyContent: 'center',
     marginRight: Spacing.md,
+  },
+  swatchStack: {
+    position: 'relative',
+    height: 24,
+    width: 40,
+  },
+  stackedSwatch: {
+    position: 'absolute',
+    top: 0,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1.5,
+    borderColor: '#FFFFFF',
+    ...Shadows.sm,
   },
   themeInfo: {
     flex: 1,
     marginRight: Spacing.sm,
+  },
+  themeNameRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: Spacing.xs,
   },
   themeName: {
     ...Typography.body,
     fontWeight: '700',
     color: Colors.charcoal,
   },
+  glassText: {
+    color: '#FFFFFF',
+  },
+  selectedText: {
+    color: Colors.deepEmerald,
+  },
+  themeTagline: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: Colors.freshGreen,
+    marginTop: 2,
+  },
   themeDesc: {
     ...Typography.caption,
     color: Colors.textMuted,
-    marginTop: 2,
+    marginTop: 4,
     lineHeight: 16,
+  },
+  badgePill: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: BorderRadius.full,
+  },
+  badgeGlass: {
+    backgroundColor: 'rgba(44, 229, 167, 0.25)',
+    borderWidth: 1,
+    borderColor: 'rgba(44, 229, 167, 0.45)',
+  },
+  badgeDark: {
+    backgroundColor: '#1E293B',
+  },
+  badgeLight: {
+    backgroundColor: Colors.emeraldLight,
+  },
+  badgePillText: {
+    fontSize: 9,
+    fontWeight: '800',
+  },
+  badgeGlassText: {
+    color: '#2CE5A7',
+  },
+  badgeDarkText: {
+    color: '#94A3B8',
+  },
+  badgeLightText: {
+    color: Colors.deepEmerald,
+  },
+  checkWrap: {
+    paddingTop: 4,
+  },
+  activeCheckCircle: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: Colors.freshGreen,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inactiveCircle: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 2,
+    borderColor: Colors.borderLight,
+  },
+  footerInfoCard: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: Spacing.md,
+    backgroundColor: Colors.emeraldLight,
+    borderRadius: BorderRadius.lg,
+    padding: Spacing.md,
+    borderWidth: 1,
+    borderColor: 'rgba(22, 152, 108, 0.25)',
+  },
+  footerInfoTexts: {
+    flex: 1,
+  },
+  footerInfoTitle: {
+    ...Typography.bodySmall,
+    fontWeight: '700',
+    color: Colors.deepEmerald,
+  },
+  footerInfoBody: {
+    fontSize: 11,
+    color: Colors.deepEmerald,
+    lineHeight: 16,
+    marginTop: 2,
+    opacity: 0.85,
   },
 });

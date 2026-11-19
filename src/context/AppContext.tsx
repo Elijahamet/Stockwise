@@ -14,8 +14,11 @@ import {
   ConflictItem,
   UserSettings,
   ConnectionStatus,
+  AppThemeId,
+  ThemeConfig,
 } from '../types';
 import { calculateExpiryStatus } from '../utils/expiry';
+import { THEME_PRESETS } from '../constants/themePresets';
 
 const STORAGE_KEYS = {
   USER: '@stockwise_user',
@@ -111,15 +114,18 @@ interface AppContextType {
   resolveConflict: (conflictId: string, resolution: 'keep_local' | 'accept_server') => void;
   addSampleConflictForUIPreview: () => void;
 
-  // Settings
+  // Settings & Theme
   settings: UserSettings;
   updateSettings: (updates: Partial<UserSettings>) => void;
+  currentTheme: ThemeConfig;
+  setAppTheme: (themeId: AppThemeId) => void;
 }
 
 const defaultSettings: UserSettings = {
   currency: 'GH₵',
   currencyCode: 'GHS',
   theme: 'light',
+  activeTheme: 'emerald',
   notificationsEnabled: true,
   lowStockAlerts: true,
   offlineSyncInterval: '15 mins',
@@ -186,7 +192,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         if (storedSales) setSalesState(JSON.parse(storedSales));
         if (storedEmployees) setEmployeesState(JSON.parse(storedEmployees));
         if (storedNotifications) setNotificationsState(JSON.parse(storedNotifications));
-        if (storedSettings) setSettingsState(JSON.parse(storedSettings));
+        if (storedSettings) {
+          const parsed = JSON.parse(storedSettings);
+          setSettingsState({ ...defaultSettings, ...parsed });
+        }
         if (storedSync) {
           const parsed = JSON.parse(storedSync);
           setSyncState((prev) => ({ ...prev, ...parsed }));
@@ -262,6 +271,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       const next = { ...prev, ...updates };
       AsyncStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(next)).catch(() => {});
       return next;
+    });
+  };
+
+  const currentTheme: ThemeConfig =
+    THEME_PRESETS[settings.activeTheme || 'emerald'] || THEME_PRESETS.emerald;
+
+  const setAppTheme = (themeId: AppThemeId) => {
+    const chosen = THEME_PRESETS[themeId];
+    updateSettings({
+      activeTheme: themeId,
+      theme: chosen?.isDark ? 'dark' : 'light',
     });
   };
 
@@ -961,6 +981,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         addSampleConflictForUIPreview,
         settings,
         updateSettings,
+        currentTheme,
+        setAppTheme,
       }}
     >
       {children}

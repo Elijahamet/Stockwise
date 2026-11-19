@@ -190,10 +190,41 @@ export interface SyncState {
   conflictItems: ConflictItem[];
 }
 
+export type AppThemeId =
+  | 'emerald'
+  | 'glass_ios27'
+  | 'midnight'
+  | 'nordic'
+  | 'champagne'
+  | 'cyberpunk';
+
+export interface ThemeConfig {
+  id: AppThemeId;
+  name: string;
+  tagline: string;
+  description: string;
+  badge?: string;
+  isGlass?: boolean;
+  isDark?: boolean;
+  colors: {
+    background: string;
+    card: string;
+    cardBorder: string;
+    text: string;
+    textMuted: string;
+    primary: string;
+    primaryGradient: [string, string, ...string[]];
+    accent: string;
+    highlight: string;
+  };
+  previewColors: string[];
+}
+
 export interface UserSettings {
   currency: string;
   currencyCode: string;
   theme: 'light' | 'dark';
+  activeTheme?: AppThemeId;
   notificationsEnabled: boolean;
   lowStockAlerts: boolean;
   offlineSyncInterval: string;
