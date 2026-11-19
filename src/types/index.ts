@@ -191,13 +191,13 @@ export interface SyncState {
 }
 
 export type AppThemeId =
+  | 'emerald'
   | 'sea_blue'
   | 'orange'
   | 'purple'
   | 'glass'
   | 'yellow'
   | 'red'
-  | 'emerald'
   | 'glass_ios27'
   | 'midnight'
   | 'nordic'

@@ -1,7 +1,34 @@
 import { AppThemeId, ThemeConfig } from '../types';
 
 export const THEME_PRESETS: Record<AppThemeId, ThemeConfig> = {
-  // 1. Sea Blue
+  // 1. Classic Emerald (Signature Stockwise Brand Green) - DEFAULT
+  emerald: {
+    id: 'emerald',
+    name: 'Classic Emerald',
+    tagline: 'Signature Stockwise Green & White',
+    badge: 'DEFAULT • GREEN',
+    description: 'Crisp daylight interface with white cards, deep forest emerald tones, and vibrant fresh green accents.',
+    isGlass: false,
+    isDark: false,
+    colors: {
+      background: '#F7F9F8',
+      card: '#FFFFFF',
+      cardBorder: '#E3E9E6',
+      text: '#1A2723',
+      textMuted: '#5C7169',
+      primary: '#0A241D',
+      primaryGradient: ['#0A241D', '#0F332A', '#16986C'],
+      accent: '#16986C',
+      accentLight: '#E8F6F1',
+      highlight: '#2CE5A7',
+      tabBarBackground: ['rgba(8, 30, 23, 0.95)', 'rgba(10, 37, 30, 0.96)', 'rgba(15, 52, 41, 0.97)'],
+      tabBarActive: '#2CE5A7',
+      tabBarBorder: 'rgba(22, 152, 108, 0.4)',
+    },
+    previewColors: ['#0A241D', '#16986C', '#2CE5A7'],
+  },
+
+  // 2. Sea Blue
   sea_blue: {
     id: 'sea_blue',
     name: 'Sea Blue',
@@ -28,7 +55,7 @@ export const THEME_PRESETS: Record<AppThemeId, ThemeConfig> = {
     previewColors: ['#072030', '#0284C7', '#38BDF8'],
   },
 
-  // 2. Sunset Orange
+  // 3. Sunset Orange
   orange: {
     id: 'orange',
     name: 'Sunset Orange',
@@ -55,7 +82,7 @@ export const THEME_PRESETS: Record<AppThemeId, ThemeConfig> = {
     previewColors: ['#361005', '#EA580C', '#FB923C'],
   },
 
-  // 3. Royal Purple
+  // 4. Royal Purple
   purple: {
     id: 'purple',
     name: 'Royal Purple',
@@ -82,7 +109,7 @@ export const THEME_PRESETS: Record<AppThemeId, ThemeConfig> = {
     previewColors: ['#240B4F', '#7C3AED', '#C4B5FD'],
   },
 
-  // 4. iOS 27 Liquid Glass
+  // 5. iOS 27 Liquid Glass
   glass: {
     id: 'glass',
     name: 'iOS 27 Liquid Glass',
@@ -109,7 +136,7 @@ export const THEME_PRESETS: Record<AppThemeId, ThemeConfig> = {
     previewColors: ['#061A1D', '#06B6D4', '#67E8F9'],
   },
 
-  // 5. Sunburst Yellow
+  // 6. Sunburst Yellow
   yellow: {
     id: 'yellow',
     name: 'Sunburst Yellow',
@@ -136,7 +163,7 @@ export const THEME_PRESETS: Record<AppThemeId, ThemeConfig> = {
     previewColors: ['#301C02', '#D97706', '#FBBF24'],
   },
 
-  // 6. Crimson Red
+  // 7. Crimson Red
   red: {
     id: 'red',
     name: 'Crimson Red',
@@ -163,8 +190,7 @@ export const THEME_PRESETS: Record<AppThemeId, ThemeConfig> = {
     previewColors: ['#360808', '#DC2626', '#F87171'],
   },
 
-  // Aliases for backward compatibility with previous stored settings
-  emerald: {} as any,
+  // Backward compatibility aliases
   glass_ios27: {} as any,
   midnight: {} as any,
   nordic: {} as any,
@@ -172,16 +198,16 @@ export const THEME_PRESETS: Record<AppThemeId, ThemeConfig> = {
   cyberpunk: {} as any,
 };
 
-// Wire aliases to match new themes gracefully
-THEME_PRESETS.emerald = THEME_PRESETS.sea_blue;
+// Wire aliases safely
 THEME_PRESETS.glass_ios27 = THEME_PRESETS.glass;
 THEME_PRESETS.midnight = THEME_PRESETS.purple;
 THEME_PRESETS.nordic = THEME_PRESETS.sea_blue;
 THEME_PRESETS.champagne = THEME_PRESETS.yellow;
 THEME_PRESETS.cyberpunk = THEME_PRESETS.glass;
 
-// The official list of 6 user themes
+// The official list of themes, with Classic Emerald (the green) first as the default!
 export const THEME_LIST: ThemeConfig[] = [
+  THEME_PRESETS.emerald,
   THEME_PRESETS.sea_blue,
   THEME_PRESETS.orange,
   THEME_PRESETS.purple,

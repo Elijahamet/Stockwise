@@ -20,13 +20,9 @@ export default function ThemePreferencesScreen() {
   const [isSaved, setIsSaved] = useState(false);
   const [activeName, setActiveName] = useState<string>('');
 
-  const currentActive = settings.activeTheme || 'sea_blue';
+  const currentActive = settings.activeTheme || 'emerald';
   const currentThemeId = (
-    currentActive === 'emerald'
-      ? 'sea_blue'
-      : currentActive === 'glass_ios27'
-      ? 'glass'
-      : currentActive
+    currentActive === 'glass_ios27' ? 'glass' : currentActive
   ) as AppThemeId;
 
   const handleSelect = (themeId: AppThemeId) => {
@@ -52,7 +48,7 @@ export default function ThemePreferencesScreen() {
 
         {/* Current Active Preview Header Card */}
         <LinearGradient
-          colors={currentTheme?.colors?.primaryGradient || ['#072030', '#0B3B59', '#0284C7']}
+          colors={currentTheme?.colors?.primaryGradient || ['#0A241D', '#0F332A', '#16986C']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={[styles.previewCard, currentTheme?.isGlass && styles.previewCardGlass]}
@@ -69,8 +65,8 @@ export default function ThemePreferencesScreen() {
             )}
           </View>
 
-          <Text style={styles.previewTitle}>{currentTheme?.name || 'Sea Blue'}</Text>
-          <Text style={styles.previewTagline}>{currentTheme?.tagline || 'Deep Oceanic Sapphire & Cyan'}</Text>
+          <Text style={styles.previewTitle}>{currentTheme?.name || 'Classic Emerald'}</Text>
+          <Text style={styles.previewTagline}>{currentTheme?.tagline || 'Signature Stockwise Green & White'}</Text>
 
           <View style={styles.previewSwatchesRow}>
             {currentTheme?.previewColors?.map((c, i) => (
@@ -83,7 +79,7 @@ export default function ThemePreferencesScreen() {
         <View style={styles.sectionHeading}>
           <Text style={styles.sectionHeadingTitle}>SELECT APP APPEARANCE</Text>
           <Text style={styles.sectionHeadingSubtitle}>
-            Choose from 6 vibrant themes: Sea Blue, Sunset Orange, Royal Purple, iOS 27 Liquid Glass, Sunburst Yellow, and Crimson Red.
+            Classic Emerald is your signature brand green. You can also choose from Sea Blue, Sunset Orange, Royal Purple, iOS 27 Liquid Glass, Sunburst Yellow, or Crimson Red.
           </Text>
         </View>
 

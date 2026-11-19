@@ -125,7 +125,7 @@ const defaultSettings: UserSettings = {
   currency: 'GH₵',
   currencyCode: 'GHS',
   theme: 'light',
-  activeTheme: 'sea_blue',
+  activeTheme: 'emerald',
   notificationsEnabled: true,
   lowStockAlerts: true,
   offlineSyncInterval: '15 mins',
@@ -275,7 +275,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const currentTheme: ThemeConfig =
-    THEME_PRESETS[settings.activeTheme || 'sea_blue'] || THEME_PRESETS.sea_blue;
+    THEME_PRESETS[settings.activeTheme || 'emerald'] || THEME_PRESETS.emerald;
 
   const setAppTheme = (themeId: AppThemeId) => {
     const chosen = THEME_PRESETS[themeId];
