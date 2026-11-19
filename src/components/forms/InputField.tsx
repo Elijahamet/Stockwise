@@ -11,6 +11,7 @@ import {
 import { Eye, EyeOff } from 'lucide-react-native';
 import { Colors } from '../../constants/colors';
 import { BorderRadius, Spacing, Typography } from '../../constants/theme';
+import { useApp } from '../../context/AppContext';
 
 interface InputFieldProps {
   label?: string;
@@ -48,13 +49,21 @@ export const InputField: React.FC<InputFieldProps> = ({
   const [isPasswordVisible, setIsPasswordVisible] = useState(!secureTextEntry);
   const [isFocused, setIsFocused] = useState(false);
 
+  let currentTheme: any = null;
+  try {
+    const app = useApp();
+    currentTheme = app?.currentTheme;
+  } catch {}
+
+  const themeAccent = currentTheme?.colors?.accent || Colors.freshGreen;
+
   return (
     <View style={[styles.container, style]}>
       {label && <Text style={styles.label}>{label}</Text>}
       <View
         style={[
           styles.inputContainer,
-          isFocused && styles.focusedBorder,
+          isFocused && [styles.focusedBorder, { borderColor: themeAccent }],
           error ? styles.errorBorder : null,
           multiline && { minHeight: 96, alignItems: 'flex-start' },
         ]}

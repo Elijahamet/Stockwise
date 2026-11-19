@@ -5,6 +5,7 @@ import { LinearGradient as ExpoGradient } from 'expo-linear-gradient';
 import { ChevronDown } from 'lucide-react-native';
 import { Colors } from '../../constants/colors';
 import { BorderRadius, Spacing, Typography, Shadows } from '../../constants/theme';
+import { useApp } from '../../context/AppContext';
 
 interface SmoothLineGraphProps {
   currencySymbol?: string;
@@ -17,6 +18,16 @@ export const SmoothLineGraph: React.FC<SmoothLineGraphProps> = ({
 }) => {
   const [period, setPeriod] = useState<'Month' | 'Week' | 'Year'>('Month');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  let currentTheme: any = null;
+  try {
+    const app = useApp();
+    currentTheme = app?.currentTheme;
+  } catch {}
+
+  const graphAccent = currentTheme?.colors?.accent || Colors.freshGreen;
+  const graphPrimary = currentTheme?.colors?.primary || Colors.deepEmerald;
+  const graphGrad = currentTheme?.colors?.primaryGradient || ['#072030', '#0284C7'];
 
   const displayAmount = todaySales > 0 ? todaySales.toFixed(2) : '59.30';
 
@@ -52,7 +63,7 @@ export const SmoothLineGraph: React.FC<SmoothLineGraphProps> = ({
                   <Text
                     style={[
                       styles.dropdownText,
-                      period === p && styles.dropdownTextActive,
+                      period === p && [styles.dropdownTextActive, { color: graphAccent }],
                     ]}
                   >
                     {p}
@@ -79,7 +90,7 @@ export const SmoothLineGraph: React.FC<SmoothLineGraphProps> = ({
         <View style={styles.svgCol}>
           {/* Pinned Tooltip Marker with Glowing Glass Gradient */}
           <ExpoGradient
-            colors={['#0F382E', '#16986C']}
+            colors={graphGrad}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={styles.tooltipPill}
@@ -92,9 +103,9 @@ export const SmoothLineGraph: React.FC<SmoothLineGraphProps> = ({
           <Svg width="100%" height={150} viewBox="0 0 300 150">
             <Defs>
               <LinearGradient id="graphGradient" x1="0" y1="0" x2="0" y2="1">
-                <Stop offset="0%" stopColor={Colors.freshGreen} stopOpacity="0.32" />
-                <Stop offset="80%" stopColor={Colors.freshGreen} stopOpacity="0.04" />
-                <Stop offset="100%" stopColor={Colors.freshGreen} stopOpacity="0" />
+                <Stop offset="0%" stopColor={graphAccent} stopOpacity="0.32" />
+                <Stop offset="80%" stopColor={graphAccent} stopOpacity="0.04" />
+                <Stop offset="100%" stopColor={graphAccent} stopOpacity="0" />
               </LinearGradient>
             </Defs>
 
@@ -108,7 +119,7 @@ export const SmoothLineGraph: React.FC<SmoothLineGraphProps> = ({
             <Path
               d="M 10 115 C 35 95, 45 90, 65 92 C 90 94, 100 115, 125 116 C 150 117, 160 55, 185 52 C 205 49, 215 68, 235 68 C 255 68, 268 45, 290 40"
               fill="none"
-              stroke={Colors.deepEmerald}
+              stroke={graphPrimary}
               strokeWidth="2.5"
             />
 
@@ -117,7 +128,7 @@ export const SmoothLineGraph: React.FC<SmoothLineGraphProps> = ({
               cx={185}
               cy={52}
               r={5}
-              fill={Colors.freshGreen}
+              fill={graphAccent}
               stroke={Colors.white}
               strokeWidth={2}
             />

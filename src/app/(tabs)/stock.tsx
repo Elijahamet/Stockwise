@@ -44,7 +44,12 @@ type ReportTab = 'inventory' | 'sales' | 'movements';
 type DateRange = 'today' | 'week' | 'month' | 'all';
 
 export default function StockScreen() {
-  const { stockMovements, products, sales, settings } = useApp();
+  const { stockMovements, products, sales, settings, currentTheme } = useApp();
+
+  const themeAccent = currentTheme?.colors?.accent || '#0284C7';
+  const themeAccentLight = currentTheme?.colors?.accentLight || '#E0F2FE';
+  const themePrimary = currentTheme?.colors?.primary || '#082538';
+  const themePrimaryGrad = currentTheme?.colors?.primaryGradient || ['#072030', '#0B3B59', '#0284C7'];
 
   // Top level switch: Operations vs Reports (Reports embedded inside Stock)
   const [mainView, setMainView] = useState<MainView>('operations');
@@ -204,18 +209,18 @@ export default function StockScreen() {
                 activeOpacity={0.7}
               >
                 <LinearGradient
-                  colors={['#E8F6F1', '#D4EFE4']}
+                  colors={[themeAccentLight, currentTheme?.colors?.cardBorder || '#D4EFE4']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   style={styles.actionIconPill}
                 >
-                  <PlusCircle size={22} color={Colors.freshGreen} />
+                  <PlusCircle size={22} color={themeAccent} />
                 </LinearGradient>
                 <View style={styles.actionCardContent}>
                   <View style={styles.actionTitleRow}>
                     <Text style={styles.actionCardTitle}>Add Stock</Text>
-                    <View style={[styles.pillBadge, { backgroundColor: Colors.emeraldLight }]}>
-                      <Text style={[styles.pillBadgeText, { color: Colors.deepEmerald }]}>PURCHASE</Text>
+                    <View style={[styles.pillBadge, { backgroundColor: themeAccentLight }]}>
+                      <Text style={[styles.pillBadgeText, { color: themePrimary }]}>PURCHASE</Text>
                     </View>
                   </View>
                   <Text style={styles.actionCardDesc}>

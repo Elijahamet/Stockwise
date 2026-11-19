@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   subtitle,
   showBusinessInfo = true,
 }) => {
-  const { business, user, notifications, syncState } = useApp();
+  const { business, user, notifications, syncState, currentTheme } = useApp();
   const unreadCount = notifications.filter((n) => !n.read).length;
   const isOffline = syncState.connectionStatus === 'offline';
 
@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <LinearGradient
-      colors={['#081E17', '#0A251E', '#0F3429']}
+      colors={currentTheme?.colors?.primaryGradient || ['#072030', '#0B3B59', '#0284C7']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}
@@ -46,8 +46,8 @@ export const Header: React.FC<HeaderProps> = ({
                 onPress={() => router.push('/settings/business-profile')}
                 activeOpacity={0.7}
               >
-                <View style={styles.storeIconWrap}>
-                  <Store size={13} color={Colors.deepEmerald} />
+                <View style={[styles.storeIconWrap, { backgroundColor: currentTheme?.colors?.accentLight || Colors.emeraldLight }]}>
+                  <Store size={13} color={currentTheme?.colors?.primary || Colors.deepEmerald} />
                 </View>
                 <Text style={styles.storeName} numberOfLines={1}>
                   {business?.name || 'Stockwise Store'}
@@ -55,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <View
                   style={[
                     styles.liveDot,
-                    { backgroundColor: isOffline ? Colors.amber : Colors.freshGreen },
+                    { backgroundColor: isOffline ? Colors.amber : (currentTheme?.colors?.highlight || Colors.freshGreen) },
                   ]}
                 />
               </TouchableOpacity>
@@ -90,15 +90,15 @@ export const Header: React.FC<HeaderProps> = ({
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.avatarBtn}
+            style={[styles.avatarBtn, { borderColor: currentTheme?.colors?.accent || Colors.freshGreen }]}
             onPress={() => router.push('/settings/personal-profile')}
             activeOpacity={0.75}
           >
             {user?.avatarUrl ? (
               <Image source={{ uri: user.avatarUrl }} style={styles.avatarImg} />
             ) : (
-              <View style={styles.avatarFallback}>
-                <Text style={styles.avatarInitials}>
+              <View style={[styles.avatarFallback, { backgroundColor: currentTheme?.colors?.accentLight || Colors.emeraldLight }]}>
+                <Text style={[styles.avatarInitials, { color: currentTheme?.colors?.primary || Colors.deepEmerald }]}>
                   {user?.fullName
                     ? user.fullName
                         .split(' ')

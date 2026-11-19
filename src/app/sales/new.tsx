@@ -45,7 +45,10 @@ interface CartItem {
 
 export default function RecordSaleScreen() {
   const params = useLocalSearchParams<{ barcode?: string }>();
-  const { products, recordSale, settings, getProductByBarcode } = useApp();
+  const { products, recordSale, settings, getProductByBarcode, currentTheme } = useApp();
+
+  const themeAccent = currentTheme?.colors?.accent || Colors.freshGreen;
+  const themeAccentLight = currentTheme?.colors?.accentLight || Colors.emeraldLight;
 
   const [cart, setCart] = useState<CartItem[]>([]);
   const [productSearch, setProductSearch] = useState('');
@@ -272,7 +275,7 @@ export default function RecordSaleScreen() {
                   </View>
 
                   {inCartItem && (
-                    <View style={styles.inCartIndicator}>
+                    <View style={[styles.inCartIndicator, { backgroundColor: themeAccent }]}>
                       <Text style={styles.inCartText}>{inCartItem.quantity}</Text>
                     </View>
                   )}
@@ -370,14 +373,20 @@ export default function RecordSaleScreen() {
                   key={pm.key}
                   style={[
                     styles.paymentTile,
-                    isSelected && styles.paymentTileActive,
+                    isSelected && [
+                      styles.paymentTileActive,
+                      { backgroundColor: themeAccentLight, borderColor: themeAccent },
+                    ],
                   ]}
                   onPress={() => setPaymentMethod(pm.key)}
                 >
                   <View
                     style={[
                       styles.paymentIconWrap,
-                      isSelected && styles.paymentIconWrapActive,
+                      isSelected && [
+                        styles.paymentIconWrapActive,
+                        { backgroundColor: themeAccent },
+                      ],
                     ]}
                   >
                     {pm.icon}

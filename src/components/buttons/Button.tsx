@@ -11,6 +11,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '../../constants/colors';
 import { BorderRadius, Spacing, Typography, Shadows } from '../../constants/theme';
+import { useApp } from '../../context/AppContext';
 
 interface ButtonProps {
   title: string;
@@ -37,6 +38,14 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   textStyle,
 }) => {
+  let currentTheme: any = null;
+  try {
+    const app = useApp();
+    currentTheme = app?.currentTheme;
+  } catch {
+    // Safe fallback if used outside AppProvider
+  }
+
   let paddingVertical = 14;
   let paddingHorizontal = Spacing.lg;
   let minHeight = 50;
@@ -63,8 +72,8 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const getTextColor = (): string => {
-    if (variant === 'outline') return Colors.charcoal;
-    if (variant === 'ghost') return Colors.deepEmerald;
+    if (variant === 'outline') return currentTheme?.colors?.text || Colors.charcoal;
+    if (variant === 'ghost') return currentTheme?.colors?.accent || Colors.deepEmerald;
     return Colors.white;
   };
 
@@ -73,7 +82,7 @@ export const Button: React.FC<ButtonProps> = ({
       {loading ? (
         <ActivityIndicator
           size="small"
-          color={variant === 'outline' || variant === 'ghost' ? Colors.deepEmerald : Colors.white}
+          color={variant === 'outline' || variant === 'ghost' ? (currentTheme?.colors?.accent || Colors.deepEmerald) : Colors.white}
         />
       ) : (
         <View style={styles.contentRow}>
@@ -92,6 +101,7 @@ export const Button: React.FC<ButtonProps> = ({
   );
 
   if (variant === 'primary') {
+    const primaryGrad = currentTheme?.colors?.primaryGradient || ['#072030', '#0284C7'];
     return (
       <TouchableOpacity
         onPress={onPress}
@@ -100,7 +110,7 @@ export const Button: React.FC<ButtonProps> = ({
         style={style}
       >
         <LinearGradient
-          colors={['#0F332A', '#16986C']}
+          colors={primaryGrad}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={[baseStyle, Shadows.sm]}

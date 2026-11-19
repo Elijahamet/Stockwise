@@ -287,7 +287,11 @@ export default function ProfileScreen() {
             contentContainerStyle={styles.themeCarousel}
           >
             {THEME_LIST.map((item) => {
-              const isSelected = (settings.activeTheme || 'emerald') === item.id;
+              const currentActive = settings.activeTheme || 'sea_blue';
+              const isSelected =
+                currentActive === item.id ||
+                (item.id === 'sea_blue' && currentActive === 'emerald') ||
+                (item.id === 'glass' && currentActive === 'glass_ios27');
               return (
                 <TouchableOpacity
                   key={item.id}

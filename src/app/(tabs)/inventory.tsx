@@ -43,7 +43,12 @@ type SortOption = 'name' | 'quantity_asc' | 'quantity_desc' | 'price';
 
 export default function InventoryScreen() {
   const params = useLocalSearchParams<{ filter?: string }>();
-  const { products, deleteProduct, deleteProducts, settings } = useApp();
+  const { products, deleteProduct, deleteProducts, settings, currentTheme } = useApp();
+
+  const themePrimaryGrad = currentTheme?.colors?.primaryGradient || ['#072030', '#0B3B59', '#0284C7'];
+  const themeAccent = currentTheme?.colors?.accent || '#0284C7';
+  const themeAccentLight = currentTheme?.colors?.accentLight || '#E0F2FE';
+  const themePrimary = currentTheme?.colors?.primary || '#082538';
 
   const [activeTab, setActiveTab] = useState<TabView>(
     params.filter === 'low'
@@ -164,7 +169,7 @@ export default function InventoryScreen() {
             activeOpacity={0.8}
             accessibilityLabel="Scan Barcode"
           >
-            <Barcode size={22} color={Colors.deepEmerald} />
+            <Barcode size={22} color={themeAccent} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -172,7 +177,7 @@ export default function InventoryScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={['#0F332A', '#16986C']}
+              colors={themePrimaryGrad}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.addBtn}

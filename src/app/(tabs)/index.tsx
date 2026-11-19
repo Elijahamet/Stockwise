@@ -39,10 +39,15 @@ import { SmoothLineGraph } from '../../components/charts/SmoothLineGraph';
 import { EmptyState } from '../../components/common/EmptyState';
 
 export default function DashboardScreen() {
-  const { products, sales, stockMovements, notifications, business, user, settings } = useApp();
+  const { products, sales, stockMovements, notifications, business, user, settings, currentTheme } = useApp();
 
   const [menuModalVisible, setMenuModalVisible] = useState(false);
   const [productTab, setProductTab] = useState<'products' | 'report'>('products');
+
+  const themePrimaryGrad = currentTheme?.colors?.primaryGradient || ['#072030', '#0B3B59', '#0284C7'];
+  const themeAccent = currentTheme?.colors?.accent || '#0284C7';
+  const themeAccentLight = currentTheme?.colors?.accentLight || '#E0F2FE';
+  const themeBg = currentTheme?.colors?.background || '#F7F9F8';
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -87,7 +92,7 @@ export default function DashboardScreen() {
       >
         {/* Soft Ambient Glow Banner */}
         <LinearGradient
-          colors={['#E6F4EE', '#F7F9F8']}
+          colors={[themeAccentLight, themeBg]}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
           style={styles.ambientGlow}
@@ -105,7 +110,7 @@ export default function DashboardScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={['#0F332A', '#16986C']}
+              colors={themePrimaryGrad}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={styles.actionPillBtn}
@@ -125,7 +130,7 @@ export default function DashboardScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={['#0A241D', '#16986C']}
+              colors={themePrimaryGrad}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.squircleIcon}
@@ -142,7 +147,7 @@ export default function DashboardScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={['#0A241D', '#16986C']}
+              colors={themePrimaryGrad}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.squircleIcon}
@@ -159,7 +164,7 @@ export default function DashboardScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={['#0A241D', '#16986C']}
+              colors={themePrimaryGrad}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.squircleIcon}
@@ -176,7 +181,7 @@ export default function DashboardScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={['#0A241D', '#16986C']}
+              colors={themePrimaryGrad}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.squircleIcon}
@@ -216,7 +221,7 @@ export default function DashboardScreen() {
             >
               {productTab === 'products' ? (
                 <LinearGradient
-                  colors={['#0F332A', '#16986C']}
+                  colors={themePrimaryGrad}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
                   style={styles.subTabItemGradient}
@@ -236,7 +241,7 @@ export default function DashboardScreen() {
             >
               {productTab === 'report' ? (
                 <LinearGradient
-                  colors={['#0F332A', '#16986C']}
+                  colors={themePrimaryGrad}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
                   style={styles.subTabItemGradient}
@@ -358,7 +363,7 @@ export default function DashboardScreen() {
           <BlurView intensity={35} tint="dark" style={StyleSheet.absoluteFill} />
           <View style={styles.drawerCard}>
             <LinearGradient
-              colors={['#0A241D', '#0F332A', '#16986C']}
+              colors={themePrimaryGrad}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.drawerGradientHeader}
@@ -383,7 +388,7 @@ export default function DashboardScreen() {
                   router.push('/(tabs)/inventory');
                 }}
               >
-                <Package size={18} color={Colors.deepEmerald} />
+                <Package size={18} color={themeAccent} />
                 <Text style={styles.drawerItemText}>Inventory Catalog</Text>
               </TouchableOpacity>
 
@@ -394,7 +399,7 @@ export default function DashboardScreen() {
                   router.push('/(tabs)/stock');
                 }}
               >
-                <ArrowLeftRight size={18} color={Colors.deepEmerald} />
+                <ArrowLeftRight size={18} color={themeAccent} />
                 <Text style={styles.drawerItemText}>Stock & Reports</Text>
               </TouchableOpacity>
 
@@ -405,7 +410,7 @@ export default function DashboardScreen() {
                   router.push('/scanner');
                 }}
               >
-                <Barcode size={18} color={Colors.deepEmerald} />
+                <Barcode size={18} color={themeAccent} />
                 <Text style={styles.drawerItemText}>Barcode & Expiry Scanner</Text>
               </TouchableOpacity>
 
@@ -416,7 +421,7 @@ export default function DashboardScreen() {
                   router.push('/expiry');
                 }}
               >
-                <AlertTriangle size={18} color={Colors.deepEmerald} />
+                <AlertTriangle size={18} color={themeAccent} />
                 <Text style={styles.drawerItemText}>Expiry Management</Text>
               </TouchableOpacity>
 
@@ -427,7 +432,7 @@ export default function DashboardScreen() {
                   router.push('/sales/history');
                 }}
               >
-                <ShoppingCart size={18} color={Colors.deepEmerald} />
+                <ShoppingCart size={18} color={themeAccent} />
                 <Text style={styles.drawerItemText}>Sales Receipts</Text>
               </TouchableOpacity>
 
@@ -438,7 +443,7 @@ export default function DashboardScreen() {
                   router.push('/employees');
                 }}
               >
-                <Users size={18} color={Colors.deepEmerald} />
+                <Users size={18} color={themeAccent} />
                 <Text style={styles.drawerItemText}>Team Members</Text>
               </TouchableOpacity>
 
@@ -449,7 +454,7 @@ export default function DashboardScreen() {
                   router.push('/sync');
                 }}
               >
-                <Wifi size={18} color={Colors.deepEmerald} />
+                <Wifi size={18} color={themeAccent} />
                 <Text style={styles.drawerItemText}>Offline Sync Queue</Text>
               </TouchableOpacity>
 

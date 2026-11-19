@@ -5,21 +5,24 @@ import { Colors } from '../../constants/colors';
 import { Platform, View, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
+import { useApp } from '../../context/AppContext';
 
 interface TabBarIconProps {
   IconComponent: React.ComponentType<{ size: number; color: string; strokeWidth: number }>;
   focused: boolean;
+  gradientColors: [string, string, ...string[]];
+  shadowColor: string;
 }
 
-const TabBarIcon = ({ IconComponent, focused }: TabBarIconProps) => {
+const TabBarIcon = ({ IconComponent, focused, gradientColors, shadowColor }: TabBarIconProps) => {
   if (focused) {
     return (
       <View style={styles.activeIconContainer}>
         <LinearGradient
-          colors={['#0E382E', '#16986C']}
+          colors={gradientColors}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
-          style={styles.activeIconGradient}
+          style={[styles.activeIconGradient, { shadowColor }]}
         >
           <IconComponent size={19} color="#FFFFFF" strokeWidth={2.4} />
         </LinearGradient>
@@ -35,6 +38,18 @@ const TabBarIcon = ({ IconComponent, focused }: TabBarIconProps) => {
 };
 
 export default function TabLayout() {
+  const { currentTheme } = useApp();
+
+  const tabBarBgColors = currentTheme?.colors?.tabBarBackground || [
+    'rgba(7, 32, 48, 0.95)',
+    'rgba(10, 48, 73, 0.96)',
+    'rgba(11, 59, 89, 0.97)',
+  ];
+  const activeTint = currentTheme?.colors?.tabBarActive || '#38BDF8';
+  const borderTop = currentTheme?.colors?.tabBarBorder || 'rgba(2, 132, 199, 0.4)';
+  const primaryGrad = currentTheme?.colors?.primaryGradient || ['#072030', '#0B3B59', '#0284C7'];
+  const accentColor = currentTheme?.colors?.accent || '#0284C7';
+
   return (
     <Tabs
       screenOptions={{
@@ -42,22 +57,18 @@ export default function TabLayout() {
           <View style={StyleSheet.absoluteFill}>
             <BlurView intensity={35} tint="dark" style={StyleSheet.absoluteFill} />
             <LinearGradient
-              colors={[
-                'rgba(8, 30, 23, 0.94)',
-                'rgba(10, 37, 30, 0.95)',
-                'rgba(15, 52, 41, 0.96)',
-              ]}
+              colors={tabBarBgColors}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={StyleSheet.absoluteFill}
             />
           </View>
         ),
-        tabBarActiveTintColor: '#2CE5A7',
+        tabBarActiveTintColor: activeTint,
         tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.60)',
         tabBarStyle: {
-          backgroundColor: '#0A241D',
-          borderTopColor: 'rgba(22, 152, 108, 0.35)',
+          backgroundColor: currentTheme?.colors?.primary || '#082538',
+          borderTopColor: borderTop,
           borderTopWidth: 1,
           height: Platform.OS === 'ios' ? 88 : 68,
           paddingBottom: Platform.OS === 'ios' ? 24 : 10,
@@ -75,7 +86,7 @@ export default function TabLayout() {
           marginTop: 2,
         },
         headerStyle: {
-          backgroundColor: Colors.deepEmerald,
+          backgroundColor: currentTheme?.colors?.primary || Colors.deepEmerald,
         },
         headerTintColor: Colors.white,
         headerTitleStyle: {
@@ -91,7 +102,12 @@ export default function TabLayout() {
           title: 'Home',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon IconComponent={Home} focused={focused} />
+            <TabBarIcon
+              IconComponent={Home}
+              focused={focused}
+              gradientColors={primaryGrad}
+              shadowColor={accentColor}
+            />
           ),
         }}
       />
@@ -101,7 +117,12 @@ export default function TabLayout() {
           title: 'Inventory',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon IconComponent={Package} focused={focused} />
+            <TabBarIcon
+              IconComponent={Package}
+              focused={focused}
+              gradientColors={primaryGrad}
+              shadowColor={accentColor}
+            />
           ),
         }}
       />
@@ -111,7 +132,12 @@ export default function TabLayout() {
           title: 'Stock',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon IconComponent={ArrowLeftRight} focused={focused} />
+            <TabBarIcon
+              IconComponent={ArrowLeftRight}
+              focused={focused}
+              gradientColors={primaryGrad}
+              shadowColor={accentColor}
+            />
           ),
         }}
       />
@@ -121,7 +147,12 @@ export default function TabLayout() {
           title: 'Profile',
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon IconComponent={User} focused={focused} />
+            <TabBarIcon
+              IconComponent={User}
+              focused={focused}
+              gradientColors={primaryGrad}
+              shadowColor={accentColor}
+            />
           ),
         }}
       />
@@ -155,7 +186,6 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#16986C',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.35,
     shadowRadius: 4,

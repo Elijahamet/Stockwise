@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import { Colors } from '../../constants/colors';
 import { BorderRadius, Shadows, Spacing, Typography } from '../../constants/theme';
+import { useApp } from '../../context/AppContext';
 
 interface StatCardProps {
   title: string;
@@ -22,6 +23,12 @@ export const StatCard: React.FC<StatCardProps> = ({
   onPress,
   style,
 }) => {
+  let currentTheme: any = null;
+  try {
+    const app = useApp();
+    currentTheme = app?.currentTheme;
+  } catch {}
+
   const getAccentColor = () => {
     switch (variant) {
       case 'amber':
@@ -31,7 +38,7 @@ export const StatCard: React.FC<StatCardProps> = ({
       case 'green':
         return Colors.freshGreen;
       default:
-        return Colors.deepEmerald;
+        return currentTheme?.colors?.accent || Colors.deepEmerald;
     }
   };
 
@@ -44,7 +51,7 @@ export const StatCard: React.FC<StatCardProps> = ({
       case 'green':
         return Colors.freshGreenLight;
       default:
-        return Colors.surfaceSubtle;
+        return currentTheme?.colors?.accentLight || Colors.surfaceSubtle;
     }
   };
 

@@ -43,7 +43,10 @@ import { Header } from '../../components/common/Header';
 type FilterTab = 'all' | 'expired' | 'expiring_soon' | 'healthy' | 'unknown';
 
 export default function ExpiryManagementScreen() {
-  const { products, updateProductExpiry, addBatchToProduct, settings } = useApp();
+  const { products, updateProductExpiry, addBatchToProduct, settings, currentTheme } = useApp();
+
+  const themeAccent = currentTheme?.colors?.accent || Colors.freshGreen;
+  const themeAccentLight = currentTheme?.colors?.accentLight || Colors.emeraldLight;
 
   const [activeFilter, setActiveFilter] = useState<FilterTab>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -213,14 +216,20 @@ export default function ExpiryManagementScreen() {
           return (
             <TouchableOpacity
               key={tab.key}
-              style={[styles.filterTabPill, isSelected && styles.activeFilterTabPill]}
+              style={[
+                styles.filterTabPill,
+                isSelected && [
+                  styles.activeFilterTabPill,
+                  { backgroundColor: themeAccentLight, borderColor: themeAccent },
+                ],
+              ]}
               onPress={() => setActiveFilter(tab.key)}
               activeOpacity={0.7}
             >
               <Text
                 style={[
                   styles.filterTabPillText,
-                  isSelected && styles.activeFilterTabPillText,
+                  isSelected && [styles.activeFilterTabPillText, { color: themeAccent }],
                 ]}
               >
                 {tab.label}

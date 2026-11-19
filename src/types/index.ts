@@ -191,6 +191,12 @@ export interface SyncState {
 }
 
 export type AppThemeId =
+  | 'sea_blue'
+  | 'orange'
+  | 'purple'
+  | 'glass'
+  | 'yellow'
+  | 'red'
   | 'emerald'
   | 'glass_ios27'
   | 'midnight'
@@ -215,7 +221,11 @@ export interface ThemeConfig {
     primary: string;
     primaryGradient: [string, string, ...string[]];
     accent: string;
+    accentLight: string;
     highlight: string;
+    tabBarBackground: [string, string, ...string[]];
+    tabBarActive: string;
+    tabBarBorder: string;
   };
   previewColors: string[];
 }
