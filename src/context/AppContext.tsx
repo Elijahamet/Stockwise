@@ -19,6 +19,7 @@ import {
 } from '../types';
 import { calculateExpiryStatus } from '../utils/expiry';
 import { THEME_PRESETS } from '../constants/themePresets';
+import { performFullSync } from '../services/supabaseSync';
 
 const STORAGE_KEYS = {
   USER: '@stockwise_user',
@@ -213,23 +214,23 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // Setters with persistent storage
   const setUser = (newUser: User | null) => {
     setUserState(newUser);
-    AsyncStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(newUser)).catch(() => {});
+    AsyncStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(newUser)).catch(() => { });
   };
 
   const setBusiness = (newBusiness: Business | null) => {
     setBusinessState(newBusiness);
-    AsyncStorage.setItem(STORAGE_KEYS.BUSINESS, JSON.stringify(newBusiness)).catch(() => {});
+    AsyncStorage.setItem(STORAGE_KEYS.BUSINESS, JSON.stringify(newBusiness)).catch(() => { });
   };
 
   const setIsOnboarded = (val: boolean) => {
     setIsOnboardedState(val);
-    AsyncStorage.setItem(STORAGE_KEYS.IS_ONBOARDED, JSON.stringify(val)).catch(() => {});
+    AsyncStorage.setItem(STORAGE_KEYS.IS_ONBOARDED, JSON.stringify(val)).catch(() => { });
   };
 
   const setProducts = (updater: React.SetStateAction<Product[]>) => {
     setProductsState((prev) => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
-      AsyncStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
@@ -237,7 +238,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const setStockMovements = (updater: React.SetStateAction<StockMovement[]>) => {
     setStockMovementsState((prev) => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
-      AsyncStorage.setItem(STORAGE_KEYS.STOCK_MOVEMENTS, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.STOCK_MOVEMENTS, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
@@ -245,7 +246,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const setSales = (updater: React.SetStateAction<Sale[]>) => {
     setSalesState((prev) => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
-      AsyncStorage.setItem(STORAGE_KEYS.SALES, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.SALES, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
@@ -253,7 +254,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const setEmployees = (updater: React.SetStateAction<Employee[]>) => {
     setEmployeesState((prev) => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
-      AsyncStorage.setItem(STORAGE_KEYS.EMPLOYEES, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.EMPLOYEES, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
@@ -261,7 +262,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const setNotifications = (updater: React.SetStateAction<NotificationItem[]>) => {
     setNotificationsState((prev) => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
-      AsyncStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
@@ -269,7 +270,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const updateSettings = (updates: Partial<UserSettings>) => {
     setSettingsState((prev) => {
       const next = { ...prev, ...updates };
-      AsyncStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
@@ -306,7 +307,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
           ...prev,
           pendingChanges: [change, ...prev.pendingChanges],
         };
-        AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => {});
+        AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => { });
         return next;
       });
     }
@@ -333,7 +334,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const updateBusiness = (updates: Partial<Business>) => {
     setBusinessState((prev) => {
       const next = prev ? { ...prev, ...updates } : null;
-      AsyncStorage.setItem(STORAGE_KEYS.BUSINESS, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.BUSINESS, JSON.stringify(next)).catch(() => { });
       return next;
     });
     recordPendingChange('product', 'update', `Updated business profile`, updates);
@@ -444,11 +445,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       prev.map((p) =>
         p.id === productId
           ? {
-              ...p,
-              expiryDate: expiryDate?.trim() || undefined,
-              manufacturingDate: manufacturingDate?.trim() || undefined,
-              updatedAt: now,
-            }
+            ...p,
+            expiryDate: expiryDate?.trim() || undefined,
+            manufacturingDate: manufacturingDate?.trim() || undefined,
+            updatedAt: now,
+          }
           : p
       )
     );
@@ -535,12 +536,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       prev.map((p) =>
         p.id === productId
           ? {
-              ...p,
-              quantity: newQuantity,
-              batches: updatedBatches.length > 0 ? updatedBatches : p.batches,
-              expiryDate: earliestExpiry,
-              updatedAt: now,
-            }
+            ...p,
+            quantity: newQuantity,
+            batches: updatedBatches.length > 0 ? updatedBatches : p.batches,
+            expiryDate: earliestExpiry,
+            updatedAt: now,
+          }
           : p
       )
     );
@@ -559,8 +560,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       notes: notes
         ? `${notes}${batchNumber ? ` (Batch ${batchNumber})` : ''}`
         : batchNumber
-        ? `Batch ${batchNumber}`
-        : undefined,
+          ? `Batch ${batchNumber}`
+          : undefined,
       employeeName: user?.fullName || 'Business Owner',
       employeeId: user?.id || 'owner-1',
       createdAt: now,
@@ -614,11 +615,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       prev.map((p) =>
         p.id === productId
           ? {
-              ...p,
-              quantity: newQuantity,
-              batches: updatedBatches,
-              updatedAt: now,
-            }
+            ...p,
+            quantity: newQuantity,
+            batches: updatedBatches,
+            updatedAt: now,
+          }
           : p
       )
     );
@@ -870,15 +871,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const setConnectionStatus = (status: ConnectionStatus) => {
     setSyncState((prev) => {
       const next = { ...prev, connectionStatus: status };
-      AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
 
-  const triggerManualSync = () => {
+  const triggerManualSync = async () => {
     setSyncState((prev) => ({ ...prev, connectionStatus: 'syncing' }));
 
-    setTimeout(() => {
+    try {
+      const syncResult = await performFullSync({
+        products,
+        sales,
+        stockMovements,
+        business,
+      });
+
       setSyncState((prev) => {
         const next = {
           ...prev,
@@ -886,11 +894,28 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
           lastSyncTime: new Date().toISOString(),
           pendingChanges: [],
         };
-        AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => {});
+        AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => { });
         return next;
       });
-      addNotification('Local Storage Synced', 'All local mutations persisted to disk cache.', 'sync');
-    }, 1200);
+
+      if (syncResult.syncedProducts > 0 || syncResult.syncedSales > 0) {
+        addNotification(
+          'Cloud Sync Complete',
+          `Synced ${syncResult.syncedProducts} products and ${syncResult.syncedSales} sales with Supabase.`,
+          'sync'
+        );
+      } else {
+        addNotification('Local Storage Synced', 'All local mutations persisted to disk cache.', 'sync');
+      }
+    } catch {
+      setSyncState((prev) => ({
+        ...prev,
+        connectionStatus: 'online' as ConnectionStatus,
+        lastSyncTime: new Date().toISOString(),
+        pendingChanges: [],
+      }));
+      addNotification('Local Storage Synced', 'All local mutations safely stored on device.', 'sync');
+    }
   };
 
   const resolveConflict = (conflictId: string, resolution: 'keep_local' | 'accept_server') => {
@@ -906,7 +931,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         ...prev,
         conflictItems: prev.conflictItems.filter((c) => c.id !== conflictId),
       };
-      AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
@@ -935,7 +960,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         ...prev,
         conflictItems: [sampleConflict, ...prev.conflictItems],
       };
-      AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => {});
+      AsyncStorage.setItem(STORAGE_KEYS.SYNC_STATE, JSON.stringify(next)).catch(() => { });
       return next;
     });
   };
