@@ -278,7 +278,14 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ## 📱 Android APK Build & Installation (Free via EAS)
 
-You can build a standalone installable Android APK without paying for a Google Play Console developer account using **EAS Build** (Expo Application Services).
+[![Download APK](https://img.shields.io/badge/Download-Android%20APK%20(v1.0.0)-success?style=for-the-badge&logo=android)](https://expo.dev/artifacts/eas/HSsoN7s4QB9N0Zu_iEi-OiiVqLeXIwcIU6rLI05S13s.apk)
+
+### 📥 Direct APK Download
+- **Production Preview APK:** [Stockwise-v1.0.0.apk (Direct Download)](https://expo.dev/artifacts/eas/HSsoN7s4QB9N0Zu_iEi-OiiVqLeXIwcIU6rLI05S13s.apk)
+- **EAS Build Artifacts & Verification:** [Expo EAS Build #387ee852](https://expo.dev/accounts/sarkcessrrr/projects/Stockwise/builds/387ee852-6ece-4ddb-ba21-b0118483f451)
+- **GitHub Releases:** [Stockwise v1.0.0 Release Assets](https://github.com/Elijahamet/Stockwise/releases)
+
+You can build or install a standalone installable Android APK without paying for a Google Play Console developer account using **EAS Build** (Expo Application Services).
 
 ### 1. Configure EAS Build
 Ensure `eas.json` is configured for an APK preview build:
