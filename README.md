@@ -1055,3 +1055,10 @@ The default signature Stockwise corporate identity:
 * Dynamic high-contrast retail theme using `#DC2626` (Ruby Scarlet) and `#991B1B` (Deep Mahogany).
 * Ideal for rapid visually demanding environments and stockroom inventory checking.
 
+
+### Chapter 71: Theme Storage & Runtime Switching Engine
+
+* Active theme ID is stored in `AsyncStorage` under `@stockwise_active_theme_v1`.
+* `ThemeContext` distributes color tokens throughout the React tree.
+* Switching themes immediately updates all active view controllers without state loss.
+
