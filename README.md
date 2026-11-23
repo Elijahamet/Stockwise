@@ -519,3 +519,31 @@ Empirical latency measurements recorded on entry-to-midrange mobile hardware (Sn
 * **Cart Item Addition & UI Re-render:** 14 milliseconds.
 * **Cold App Startup to Interactive Dashboard:** 780 milliseconds.
 
+
+### Chapter 7: Source Code Map & Directory Structure
+
+```text
+Stockwise/
+├── assets/                  # Brand icons, splash screens, vector graphics
+├── src/
+│   ├── app/                 # Expo Router file-based screens & navigation stacks
+│   │   ├── (auth)/          # Welcome, login, and registration flows
+│   │   ├── (tabs)/          # Primary navigation tabs (dashboard, inventory, scanner, sell, profile)
+│   │   └── _layout.tsx      # Root provider wrapping & navigation guards
+│   ├── components/          # Reusable presentation & composite components
+│   │   ├── common/          # Buttons, headers, badges, modals, cards
+│   │   ├── forms/           # Form inputs, selectors, date pickers
+│   │   └── charts/          # SVG line graphs and bar charts
+│   ├── constants/           # Color palettes, typography, theme tokens
+│   ├── context/             # AppContext (data state) & ThemeContext (styling)
+│   ├── hooks/               # Custom lifecycle and hardware hooks
+│   ├── lib/                 # Supabase client & network persistence adapters
+│   ├── services/            # Bidirectional cloud synchronization services
+│   ├── types/               # TypeScript interfaces, unions, and domain contracts
+│   └── utils/               # Expiry date arithmetic, currency formatters, barcode helpers
+├── supabase/
+│   └── migrations/          # PostgreSQL schema DDL, RLS policies, trigger functions
+├── eas.json                 # Cloud build configuration profiles
+└── app.json                 # Native application manifest & permission declarations
+```
+
