@@ -794,3 +794,9 @@ To prevent a single product barcode from firing multiple times within 1 second:
 * Uses an atomic lock reference `isScanningLockedRef = useRef(false)`.
 * Upon successful decode, the lock engages, triggers haptic feedback, displays the bottom sheet, and sets a 1,500ms cooldown timer before unlocking.
 
+
+### Chapter 36: Flashlight & Torch Control Under Low Light
+
+* The scanner interface includes a dedicated hardware torch toggle button.
+* Illuminates dark backroom shelves and underneath storage counters without requiring the user to switch apps.
+
