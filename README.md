@@ -800,3 +800,12 @@ To prevent a single product barcode from firing multiple times within 1 second:
 * The scanner interface includes a dedicated hardware torch toggle button.
 * Illuminates dark backroom shelves and underneath storage counters without requiring the user to switch apps.
 
+
+### Chapter 37: Unrecognized Barcode Quick-Add Workflows
+
+When an uncataloged barcode is scanned:
+1. Audio-visual feedback alerts the operator that the item is new.
+2. A bottom sheet appears with the pre-filled barcode.
+3. The operator inputs the product name, cost price, selling price, and initial expiry date.
+4. The product is instantly added to the catalog and ready for immediate sale.
+
