@@ -920,3 +920,9 @@ Upon transaction completion, a digital receipt modal is generated containing:
 5. If cash, enter amount tendered and confirm change to return.
 6. Tap **Complete Sale** to record transaction and display receipt.
 
+
+### Chapter 52: Cart Cancellation & Void Safeguards
+
+* Accidental cart clearing is prevented via a confirmation alert modal.
+* Tapping "Clear Cart" requires explicit confirmation before resetting items, preventing lost checkout progress during busy customer queues.
+
