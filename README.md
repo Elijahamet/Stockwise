@@ -672,3 +672,10 @@ Every physical movement of stock produces an unchangeable audit row in `stock_mo
 * `reason` (text): Narrative documentation for accountability.
 * `created_at` (timestamptz): Exact timestamp of occurrence.
 
+
+### Chapter 21: Sales & Itemized Receipt Entities
+
+Transactions are split into header and detail tables:
+* `sales`: Records `receipt_number`, `subtotal`, `discount`, `total`, `payment_method` (`cash`, `momo`, `card`), `sold_by`, and transaction timestamp.
+* `sale_items`: Normalized line items containing `sale_id`, `product_id`, `unit_price`, `quantity`, and `subtotal`.
+
