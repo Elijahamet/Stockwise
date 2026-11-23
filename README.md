@@ -888,3 +888,9 @@ Stockwise supports the most common payment channels in modern commerce:
 * **Card:** For external POS debit/credit card payments.
 * **Bank Transfer:** For wholesale or invoice payments.
 
+
+### Chapter 48: Cash Tender & Change Computation
+
+* When Cash is selected, cashiers can tap quick-tender bills ($10, $20, $50, $100) or enter custom amounts.
+* The system computes customer change due immediately, reducing checkout calculation errors.
+
