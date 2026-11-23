@@ -971,3 +971,9 @@ When physical stock counts differ from system counts:
 * Managers can adjust on-hand quantities via **Adjust Stock**.
 * Requires selecting a mandatory reason code: `Inventory Count Correction`, `Damaged Goods`, `Internal Store Use`, or `Theft/Shrinkage`.
 
+
+### Chapter 59: Minimum Stock Reorder Thresholds
+
+* Products support customizable low-stock alert thresholds (default: 5 units).
+* When total inventory dips below this threshold, the item is flagged with an orange **Low Stock** badge on the dashboard.
+
