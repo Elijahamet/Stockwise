@@ -985,3 +985,14 @@ $$\text{Gross Profit} = \text{Selling Price} - \text{Cost Price}$$
 $$\text{Profit Margin (\%)} = \left( \frac{\text{Gross Profit}}{\text{Selling Price}} \right) \times 100$$
 Helps store owners ensure products maintain sustainable retail markups.
 
+
+### Chapter 61: Product Category Taxonomy
+
+Organizes items into practical retail departments:
+* 💊 Medications & Healthcare
+* 🥛 Food & Perishables
+* 🥤 Beverages & Drinks
+* 💄 Cosmetics & Personal Care
+* 🧼 Household & Cleaning
+* 📦 General Merchandise
+
