@@ -689,3 +689,17 @@ The `employees` and `profiles` tables govern access control:
   * `cashier`: Point of sale operations, receipt generation, barcode lookup.
 * Permissions can be toggled per account to enforce separation of duties.
 
+
+### Chapter 23: PostgreSQL Row Level Security (RLS)
+
+All tables enforce PostgreSQL RLS policies ensuring users can only read and write rows belonging to their business:
+```sql
+CREATE POLICY "Tenant Isolation Policy" ON products
+FOR ALL USING (
+    business_id IN (
+        SELECT business_id FROM profiles WHERE id = auth.uid()
+    )
+);
+```
+Even if a client attempts to forge API requests, the PostgreSQL engine filters out unauthorized rows at the kernel level.
+
