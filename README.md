@@ -833,3 +833,9 @@ When a product contains multiple inventory deliveries:
 * The batch with the closest expiration date bubbles up as the master display date on the product card.
 * Guarantees staff are always warned about the stock that will expire first (First-Expired, First-Out: FEFO).
 
+
+### Chapter 41: 30-Day Warning Window & Alert Triggers
+
+* The Dashboard features a prominent amber radar card showing the total count of products expiring within 30 days.
+* Tapping the alert opens the filtered Expiry Inspector screen, allowing store managers to mark down prices before products spoil.
+
