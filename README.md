@@ -1068,3 +1068,9 @@ The default signature Stockwise corporate identity:
 * Allows store cashiers to unlock the register terminal quickly with a 4-digit PIN.
 * Operates 100% offline without requiring internet network calls to authenticate shift workers.
 
+
+### Chapter 73: Supabase Cloud Auth & Email Authentication
+
+* Store owner accounts authenticate securely via Supabase Auth using industry-standard JWTs (JSON Web Tokens).
+* Supports email/password sign-in and automated password reset workflows.
+
