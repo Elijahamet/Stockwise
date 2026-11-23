@@ -747,3 +747,9 @@ Push requests utilize PostgreSQL `UPSERT` (`INSERT ... ON CONFLICT DO UPDATE`):
 * **Catalog Metadata:** Uses a **Last-Write-Wins (LWW)** strategy based on client vs server timestamps.
 * **Inventory Quantities:** Increments and decrements are computed relative to delta changes rather than absolute overwrites, preserving physical stock integrity.
 
+
+### Chapter 30: Network Reconnect Detection & Resumption
+
+* Listens to NetInfo network state transitions.
+* When connectivity shifts from `offline` to `online`, the synchronization engine triggers automatically in the background without user intervention.
+
