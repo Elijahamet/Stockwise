@@ -787,3 +787,10 @@ Rather than running linear array scans (`O(N)`), barcodes are indexed into a Jav
 * Lookup time: `O(1)` constant time.
 * Allows instantaneous product recognition within 2 milliseconds even in stores holding 10,000+ distinct inventory items.
 
+
+### Chapter 35: Scan Lock & Debounce Mechanics
+
+To prevent a single product barcode from firing multiple times within 1 second:
+* Uses an atomic lock reference `isScanningLockedRef = useRef(false)`.
+* Upon successful decode, the lock engages, triggers haptic feedback, displays the bottom sheet, and sets a 1,500ms cooldown timer before unlocking.
+
