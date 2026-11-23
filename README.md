@@ -879,3 +879,12 @@ The checkout terminal (`src/app/(tabs)/sell.tsx`) provides an ergonomic register
 * **Net Total:** Computes final payable balance with zero rounding drift:
   $$\text{Net Total} = \max(0, \text{Subtotal} - \text{Discount})$$
 
+
+### Chapter 47: Multi-Payment Options: Cash, MoMo & Card
+
+Stockwise supports the most common payment channels in modern commerce:
+* **Cash:** Calculates tendered amount and customer change.
+* **Mobile Money (MoMo):** For MTN MoMo, Telecel Cash, and AirtelTigo transactions.
+* **Card:** For external POS debit/credit card payments.
+* **Bank Transfer:** For wholesale or invoice payments.
+
