@@ -948,3 +948,13 @@ At the end of each work shift:
 * **SKU Structure:** Use uppercase alphanumeric codes reflecting category and item (e.g. `DENT-COL-150`).
 * **Barcodes:** Scan existing packaging barcode or let Stockwise generate an internal barcode code.
 
+
+### Chapter 56: Shipment Arrival Logging & Supplier Association
+
+When new stock arrives from suppliers:
+1. Navigate to the product profile and tap **Add Batch**.
+2. Enter the batch number from the shipping manifest.
+3. Set the verified expiration date printed on the packaging.
+4. Enter received quantity and supplier vendor name.
+5. Tap **Save Batch**; total inventory increments immediately.
+
