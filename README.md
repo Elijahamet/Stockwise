@@ -932,3 +932,12 @@ Upon transaction completion, a digital receipt modal is generated containing:
 * Cashiers can attach custom notes (e.g. customer phone number, external MoMo transaction ID, or delivery instructions) to each sale.
 * Metadata is stored with the receipt record for dispute resolution and auditing.
 
+
+### Chapter 54: End-of-Shift Cash Reconciliation
+
+At the end of each work shift:
+1. Open the **Sales History** screen.
+2. Filter sales by the current date and cashier name.
+3. Compare total recorded cash sales against physical cash in the drawer.
+4. Export or verify daily revenue totals for store accounting.
+
