@@ -1062,3 +1062,9 @@ The default signature Stockwise corporate identity:
 * `ThemeContext` distributes color tokens throughout the React tree.
 * Switching themes immediately updates all active view controllers without state loss.
 
+
+### Chapter 72: Local PIN Authentication & Offline Access
+
+* Allows store cashiers to unlock the register terminal quickly with a 4-digit PIN.
+* Operates 100% offline without requiring internet network calls to authenticate shift workers.
+
