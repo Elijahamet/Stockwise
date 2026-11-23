@@ -910,3 +910,13 @@ Upon transaction completion, a digital receipt modal is generated containing:
 * Subtotal, discounts, final total paid, and change returned.
 * Cashier name and transaction timestamp.
 
+
+### Chapter 51: Cashier Standard Operating Procedure (SOP)
+
+1. Open the **Sell** tab on Stockwise.
+2. Scan items or select them from the catalog list.
+3. Verify line items and quantities with the customer.
+4. Tap **Checkout** and select the customer's payment method.
+5. If cash, enter amount tendered and confirm change to return.
+6. Tap **Complete Sale** to record transaction and display receipt.
+
