@@ -496,3 +496,16 @@ To ensure any retailer or portfolio evaluator can run Stockwise without incurrin
 * **Binary Distribution:** GitHub Releases (unlimited public downloads with 2 GB per file limits).
 * **Client Device Hardware:** Uses standard Android 10+ devices without auxiliary peripherals.
 
+
+### Chapter 5: Hardware Compatibility & Environment Specifications
+
+* **Operating System Support:**
+  * **Android:** Android 10.0 (API level 29) through Android 15.0+ (ARM64 & x86_64).
+  * **iOS:** iOS 15.0 through iOS 18.0+ via Expo Go client.
+* **Camera Sensor Requirements:**
+  * Minimum 8.0 Megapixels with Autofocus support.
+  * Hardware camera LED flash for low-light shelf scanning.
+* **Memory & Storage Footprint:**
+  * RAM consumption: ~85 MB steady-state under active camera scanning.
+  * Flash storage: ~125 MB installed application size + ~10 MB local SQLite/AsyncStorage catalog data.
+
