@@ -1127,3 +1127,17 @@ npx expo start --tunnel
 # Scan QR code with Expo Go on iOS or Android
 ```
 
+
+### Chapter 79: EAS Cloud Build & Android APK Generation Guide
+
+To generate a new installable standalone Android APK without an Android Studio installation:
+```bash
+# 1. Authenticate with EAS
+npx eas-cli login
+
+# 2. Trigger preview build configured for APK output
+npx eas-cli build --platform android --profile preview
+
+# 3. Download the generated APK link provided upon completion
+```
+
