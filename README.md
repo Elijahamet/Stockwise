@@ -607,3 +607,11 @@ Components are strictly presentation-focused:
 * Domain rules (e.g. `calculateExpiryStatus()`, `computeCartTotals()`, `filterStock()`) reside in pure utility functions in `src/utils/`.
 * State mutations are accessed exclusively via custom hooks (`useApp()`, `useTheme()`), enabling clean unit testing without mocking UI trees.
 
+
+### Chapter 15: Data Validation & Sanitization Protocols
+
+* **TypeScript Strictness:** Strict null checks and zero `any` usage guarantee contract safety.
+* **Input Sanitization:** Barcode inputs strip leading and trailing whitespace, tabs, and non-printable characters.
+* **Numeric Guardrails:** Currency calculations are rounded to two decimal places to prevent floating-point precision errors (e.g. `0.1 + 0.2 = 0.30000000000000004`).
+* **Date Parsing:** Dates enforce ISO 8601 string parsing at UTC midnight, avoiding timezone rollover errors.
+
