@@ -825,3 +825,11 @@ Implemented in `src/utils/expiry.ts`:
 3. 🔴 **EXPIRED (`expired`):** Days remaining $\le 0$. Product is strictly barred from checkout.
 4. ⚪ **EXPIRY DATE UNKNOWN (`unknown`):** Non-perishable hardware or unrecorded date. Never falsely marked expired.
 
+
+### Chapter 40: Earliest-Expiring Batch Bubbling Algorithm
+
+When a product contains multiple inventory deliveries:
+* The system evaluates all active batches with positive quantity (`quantity > 0`).
+* The batch with the closest expiration date bubbles up as the master display date on the product card.
+* Guarantees staff are always warned about the stock that will expire first (First-Expired, First-Out: FEFO).
+
