@@ -996,3 +996,11 @@ Organizes items into practical retail departments:
 * 🧼 Household & Cleaning
 * 📦 General Merchandise
 
+
+### Chapter 62: Inventory Search, Filtering & Sorting Engines
+
+The inventory management screen provides instant multi-factor search:
+* Search by full or partial product name, SKU, or barcode.
+* Filter by category tabs or stock levels (All, Low Stock, Out of Stock).
+* Sort alphabetically, by price, by quantity, or by closest expiration date.
+
