@@ -711,3 +711,11 @@ Supabase Storage hosts multimedia assets:
 * `business-logos`: Public bucket for receipts and store branding.
 * **Storage Limits:** File upload size capped at 5 MB; MIME types restricted to `image/png`, `image/jpeg`, and `image/webp`.
 
+
+### Chapter 25: Database Triggers & Automated Profiles
+
+When a new store owner registers via Supabase Auth, an automated trigger executes:
+1. `handle_new_user()` intercepts the `auth.users` insert event.
+2. Creates a default `business` record named after the store.
+3. Inserts an administrative `profile` record linking the user's UUID with `role = 'owner'`.
+
