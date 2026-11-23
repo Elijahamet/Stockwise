@@ -847,3 +847,9 @@ When a cashier attempts to add an expired item to the checkout cart:
   `WARNING: THIS PRODUCT HAS EXPIRED. DO NOT SELL IT.`
 * The "Add to Cart" button is disabled, protecting consumers and preserving store reputation.
 
+
+### Chapter 43: Expired Stock Quarantine & Write-Off Logging
+
+* Expired stock can be quarantined with a single tap via the "Write-Off Expired Stock" action.
+* Automatically deducts units from on-hand inventory and registers an immutable `expired_write_off` event in the stock movements ledger for accounting tax deductions.
+
