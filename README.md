@@ -1098,3 +1098,9 @@ The default signature Stockwise corporate identity:
 * Store owners can invite staff members by assigning unique PINs and designating specific operational roles.
 * Access can be deactivated instantly from the Profile & Settings screen.
 
+
+### Chapter 77: Secure Logout & Route Guard Redirection
+
+* Tapping **Sign Out** clears current session tokens from memory and local storage.
+* Expo Router route guards automatically redirect the user back to the primary welcome screen (`/welcome`).
+
