@@ -646,3 +646,15 @@ The `products` table schema:
 * `expiry_date` (date): Earliest batch expiry date.
 * `category` (text): Product department classification.
 
+
+### Chapter 19: Multi-Batch Inventory Architecture
+
+Products received across different delivery dates are tracked independently in `product_batches`:
+* `id` (text, Primary Key): Unique batch identifier.
+* `product_id` (text, Foreign Key -> products.id): Associated catalog item.
+* `batch_number` (text): Manufacturer lot number.
+* `quantity` (numeric): Remaining quantity specific to this delivery lot.
+* `expiry_date` (date): Distinct shelf-life expiration date.
+* `supplier` (text): Distributor or vendor source.
+* `received_date` (date): Intake date.
+
