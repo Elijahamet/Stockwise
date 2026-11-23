@@ -658,3 +658,17 @@ Products received across different delivery dates are tracked independently in `
 * `supplier` (text): Distributor or vendor source.
 * `received_date` (date): Intake date.
 
+
+### Chapter 20: Immutable Stock Movements Ledger
+
+Every physical movement of stock produces an unchangeable audit row in `stock_movements`:
+* `id` (text, Primary Key): Unique ledger event ID.
+* `business_id` (uuid, Foreign Key): Business reference.
+* `product_id` (text, Foreign Key): Product reference.
+* `type` (text): Movement category (`sale`, `restock`, `adjustment`, `expired_write_off`).
+* `quantity_change` (numeric): Signed integer representing unit delta (e.g. `-2`, `+50`).
+* `previous_quantity` (numeric): Balance prior to transaction.
+* `new_quantity` (numeric): Resulting on-hand balance.
+* `reason` (text): Narrative documentation for accountability.
+* `created_at` (timestamptz): Exact timestamp of occurrence.
+
