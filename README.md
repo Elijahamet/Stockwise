@@ -599,3 +599,11 @@ The barcode scanning subsystem interfaces directly with the native camera via `e
 * **Resolution Cropping:** Hardware viewfinder locks focus within a central target bounding box to prevent scanning adjacent items in crowded store aisles.
 * **Hardware Acceleration:** Native Android MLKit/ZBar routines process symbology decoding directly in C++ before forwarding the decoded alphanumeric string over the bridge.
 
+
+### Chapter 14: UI & Domain Logic Separation
+
+Components are strictly presentation-focused:
+* Screens (`src/app/`) declare visual structure, layout spacing, and UI user interactions.
+* Domain rules (e.g. `calculateExpiryStatus()`, `computeCartTotals()`, `filterStock()`) reside in pure utility functions in `src/utils/`.
+* State mutations are accessed exclusively via custom hooks (`useApp()`, `useTheme()`), enabling clean unit testing without mocking UI trees.
+
