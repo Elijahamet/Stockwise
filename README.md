@@ -817,3 +817,11 @@ Implemented in `src/utils/expiry.ts`:
 * Millisecond differences are converted to exact calendar days remaining:
   $$\text{Days Remaining} = \left\lfloor \frac{\text{Expiry Timestamp} - \text{Today Midnight}}{86,400,000} \right\rfloor$$
 
+
+### Chapter 39: 4-State Expiry Classification Taxonomy
+
+1. 🟢 **NOT EXPIRED (`not_expired`):** Shelf life > 30 days remaining. Safe for regular sale and shelf display.
+2. 🟡 **EXPIRING SOON (`expiring_soon`):** Between 1 and 30 days remaining. Triggers discount recommendations.
+3. 🔴 **EXPIRED (`expired`):** Days remaining $\le 0$. Product is strictly barred from checkout.
+4. ⚪ **EXPIRY DATE UNKNOWN (`unknown`):** Non-perishable hardware or unrecorded date. Never falsely marked expired.
+
