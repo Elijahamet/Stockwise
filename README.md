@@ -941,3 +941,10 @@ At the end of each work shift:
 3. Compare total recorded cash sales against physical cash in the drawer.
 4. Export or verify daily revenue totals for store accounting.
 
+
+### Chapter 55: Product Catalog Setup & SKU Naming Conventions
+
+* **Product Naming:** Format as `[Brand] [Product Description] [Size/Variant]` (e.g., `Colgate Total Toothpaste 150ml`).
+* **SKU Structure:** Use uppercase alphanumeric codes reflecting category and item (e.g. `DENT-COL-150`).
+* **Barcodes:** Scan existing packaging barcode or let Stockwise generate an internal barcode code.
+
