@@ -703,3 +703,11 @@ FOR ALL USING (
 ```
 Even if a client attempts to forge API requests, the PostgreSQL engine filters out unauthorized rows at the kernel level.
 
+
+### Chapter 24: Cloud Storage Buckets & Asset Security
+
+Supabase Storage hosts multimedia assets:
+* `product-images`: Public bucket for catalog item photography.
+* `business-logos`: Public bucket for receipts and store branding.
+* **Storage Limits:** File upload size capped at 5 MB; MIME types restricted to `image/png`, `image/jpeg`, and `image/webp`.
+
