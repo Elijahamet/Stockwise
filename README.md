@@ -926,3 +926,9 @@ Upon transaction completion, a digital receipt modal is generated containing:
 * Accidental cart clearing is prevented via a confirmation alert modal.
 * Tapping "Clear Cart" requires explicit confirmation before resetting items, preventing lost checkout progress during busy customer queues.
 
+
+### Chapter 53: Customer Order Notes & Reference Metadata
+
+* Cashiers can attach custom notes (e.g. customer phone number, external MoMo transaction ID, or delivery instructions) to each sale.
+* Metadata is stored with the receipt record for dispute resolution and auditing.
+
