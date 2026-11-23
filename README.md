@@ -547,3 +547,12 @@ Stockwise/
 └── app.json                 # Native application manifest & permission declarations
 ```
 
+
+### Chapter 8: Multi-Layer System Architecture
+
+Stockwise employs a four-tier decoupled architectural hierarchy:
+1. **Presentation Layer (UI):** Pure functional React Native components utilizing typed themes and reactive hooks. No direct SQL or network calls occur inside UI components.
+2. **Domain & Application State Layer:** `AppContext` coordinates catalog mutations, cart transactions, expiry verifications, and user credentials.
+3. **Local Persistence Layer:** High-speed `AsyncStorage` caching provides synchronous reads and durable write-through durability.
+4. **Cloud Synchronization Layer:** Asynchronous background worker (`supabaseSync.ts`) marshals local changes into PostgreSQL transactions and reconciles incoming changes.
+
