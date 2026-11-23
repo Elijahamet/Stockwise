@@ -839,3 +839,11 @@ When a product contains multiple inventory deliveries:
 * The Dashboard features a prominent amber radar card showing the total count of products expiring within 30 days.
 * Tapping the alert opens the filtered Expiry Inspector screen, allowing store managers to mark down prices before products spoil.
 
+
+### Chapter 42: Safety Guardrails Blocking Sale of Expired Items
+
+When a cashier attempts to add an expired item to the checkout cart:
+* The app halts the transaction with an immediate high-priority warning modal:  
+  `WARNING: THIS PRODUCT HAS EXPIRED. DO NOT SELL IT.`
+* The "Add to Cart" button is disabled, protecting consumers and preserving store reputation.
+
