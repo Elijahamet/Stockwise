@@ -1141,3 +1141,23 @@ npx eas-cli build --platform android --profile preview
 # 3. Download the generated APK link provided upon completion
 ```
 
+
+### Chapter 80: Troubleshooting Runbook & Maintenance FAQ
+
+#### 1. Camera scanner shows a black screen
+* **Fix:** Open Android App Info &rarr; Permissions &rarr; Camera &rarr; Toggle "Allow while using the app".
+
+#### 2. Products show "EXPIRY DATE UNKNOWN"
+* **Fix:** This is normal for items entered without an explicit expiry date. Edit the product to add an expiration date.
+
+#### 3. Supabase queries return error or empty results
+* **Fix:** Check that your free Supabase project hasn't been paused due to 7 days of inactivity. Go to your Supabase dashboard and click **Restore project**.
+
+#### 4. Need to test on an iPhone?
+* **Fix:** Download the free **Expo Go** app from the Apple App Store, run `npx expo start --tunnel` on your workstation, and scan the terminal QR code.
+
+---
+
+### 🏁 Documentation Complete
+*This comprehensive 80-part handbook constitutes the complete architectural specification, operator manual, and technical field guide for Stockwise.*
+
