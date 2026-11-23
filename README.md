@@ -486,3 +486,13 @@ Stockwise is purpose-built for commercial sectors where date safety and fast tur
 | **Mobility & Stock Auditing** | Fixed to checkout counter | **Total mobility** — audit backroom shelves by hand |
 | **Software Licensing** | $60 – $200 recurring monthly SaaS fee | **Free Tier** open-source deployable model |
 
+
+### Chapter 4: Zero-Cost Operational Architecture
+
+To ensure any retailer or portfolio evaluator can run Stockwise without incurring cloud bills, the system operates entirely within perpetual free tiers:
+* **PostgreSQL Relational DB:** Hosted on Supabase Free Tier (500 MB capacity, accommodating up to 250,000 product rows).
+* **Identity Management:** Supabase Auth (50,000 monthly active users for free).
+* **Cloud Compilation:** Expo Application Services (30 free production Android APK builds per calendar month).
+* **Binary Distribution:** GitHub Releases (unlimited public downloads with 2 GB per file limits).
+* **Client Device Hardware:** Uses standard Android 10+ devices without auxiliary peripherals.
+
