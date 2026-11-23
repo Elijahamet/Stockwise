@@ -591,3 +591,11 @@ Stockwise eliminates stale screen bugs via React's unidirectional data flow:
 3. Updated arrays are emitted to `AppContext`.
 4. React re-evaluates consumers: Dashboard revenue metrics, Inventory stock badges, and Low Stock alert counts update simultaneously without requiring screen refreshes.
 
+
+### Chapter 13: Optical Camera Frame Acquisition Pipeline
+
+The barcode scanning subsystem interfaces directly with the native camera via `expo-camera/CameraView`:
+* **Frame Rate:** Streams video frames at 30 FPS.
+* **Resolution Cropping:** Hardware viewfinder locks focus within a central target bounding box to prevent scanning adjacent items in crowded store aisles.
+* **Hardware Acceleration:** Native Android MLKit/ZBar routines process symbology decoding directly in C++ before forwarding the decoded alphanumeric string over the bridge.
+
