@@ -631,3 +631,18 @@ Every core entity in Stockwise includes a foreign key `business_id` pointing to 
 * All products, batches, stock movements, and employee profiles are keyed to that `business_id`.
 * Cross-tenant data leakage is structurally impossible at the database engine level via Row Level Security.
 
+
+### Chapter 18: Product Catalog Entity Model
+
+The `products` table schema:
+* `id` (text, Primary Key): Unique client-generated UUID or alphanumeric ID.
+* `business_id` (uuid, Foreign Key -> businesses.id): Tenant partition.
+* `name` (text, NOT NULL): Product display title.
+* `sku` (text): Stock keeping unit identifier.
+* `barcode` (text, UNIQUE): Universal Product Code (UPC/EAN) index.
+* `cost_price` (numeric): Wholesale purchase cost.
+* `selling_price` (numeric): Retail customer price.
+* `quantity` (numeric): Aggregated on-hand inventory count.
+* `expiry_date` (date): Earliest batch expiry date.
+* `category` (text): Product department classification.
+
