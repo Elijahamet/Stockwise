@@ -1010,3 +1010,11 @@ The inventory management screen provides instant multi-factor search:
 * Tracks non-sale inventory losses with dedicated write-off reasons.
 * Allows store owners to identify high-spoilage vendors and protect retail profitability.
 
+
+### Chapter 64: Multi-Store Inventory Scaling Roadmap
+
+Future enterprise capabilities designed into the schema:
+* Multi-branch stock allocation via `store_id` partitioning.
+* Inter-branch transfer requests and transit tracking.
+* Central warehouse distribution management.
+
