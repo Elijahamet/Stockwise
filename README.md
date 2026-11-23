@@ -1104,3 +1104,26 @@ The default signature Stockwise corporate identity:
 * Tapping **Sign Out** clears current session tokens from memory and local storage.
 * Expo Router route guards automatically redirect the user back to the primary welcome screen (`/welcome`).
 
+
+### Chapter 78: Developer Setup & Live Bundler Runbook
+
+To run Stockwise locally on your development workstation:
+```bash
+# 1. Clone repository
+git clone https://github.com/Elijahamet/Stockwise.git
+cd Stockwise
+
+# 2. Install dependencies
+npx expo install
+
+# 3. Configure environment variables
+cp .env.example .env
+# Fill in EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY
+
+# 4. Start Metro bundler with tunnel
+npx expo start --tunnel
+
+# 5. Open on device
+# Scan QR code with Expo Go on iOS or Android
+```
+
