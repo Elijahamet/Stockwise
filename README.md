@@ -556,3 +556,10 @@ Stockwise employs a four-tier decoupled architectural hierarchy:
 3. **Local Persistence Layer:** High-speed `AsyncStorage` caching provides synchronous reads and durable write-through durability.
 4. **Cloud Synchronization Layer:** Asynchronous background worker (`supabaseSync.ts`) marshals local changes into PostgreSQL transactions and reconciles incoming changes.
 
+
+### Chapter 9: React 19, Expo SDK 58 & Hermes Engine
+
+* **React 19 Concurrency:** Leverages concurrent rendering optimizations for snappy list scrolling and background calculations without stuttering 60fps animations.
+* **Expo SDK 58 Architecture:** Built on the modern Continuous Native Generation (CNG) pipeline, eliminating legacy fragile `android/` and `ios/` folders.
+* **Hermes Bytecode Pre-compilation:** JavaScript files are ahead-of-time (AOT) compiled into optimized Hermes bytecode during the EAS cloud build, resulting in instant startup and minimal memory footprint.
+
