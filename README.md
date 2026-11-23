@@ -977,3 +977,11 @@ When physical stock counts differ from system counts:
 * Products support customizable low-stock alert thresholds (default: 5 units).
 * When total inventory dips below this threshold, the item is flagged with an orange **Low Stock** badge on the dashboard.
 
+
+### Chapter 60: Profit Margin & Markup Formulas
+
+Stockwise calculates gross margins in real time:
+$$\text{Gross Profit} = \text{Selling Price} - \text{Cost Price}$$
+$$\text{Profit Margin (\%)} = \left( \frac{\text{Gross Profit}}{\text{Selling Price}} \right) \times 100$$
+Helps store owners ensure products maintain sustainable retail markups.
+
