@@ -615,3 +615,11 @@ Components are strictly presentation-focused:
 * **Numeric Guardrails:** Currency calculations are rounded to two decimal places to prevent floating-point precision errors (e.g. `0.1 + 0.2 = 0.30000000000000004`).
 * **Date Parsing:** Dates enforce ISO 8601 string parsing at UTC midnight, avoiding timezone rollover errors.
 
+
+### Chapter 16: PostgreSQL Relational Schema
+
+The backend architecture is hosted on PostgreSQL 15 via Supabase:
+* **Relational Integrity:** Foreign keys enforce strict referential constraints with cascading rules.
+* **Audit Triggers:** `updated_at` timestamps update automatically using PostgreSQL procedural language triggers (`moddatetime`).
+* **Indexes:** B-tree indexes optimize high-frequency queries on `business_id`, `barcode`, `sku`, and `expiry_date`.
+
