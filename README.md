@@ -623,3 +623,11 @@ The backend architecture is hosted on PostgreSQL 15 via Supabase:
 * **Audit Triggers:** `updated_at` timestamps update automatically using PostgreSQL procedural language triggers (`moddatetime`).
 * **Indexes:** B-tree indexes optimize high-frequency queries on `business_id`, `barcode`, `sku`, and `expiry_date`.
 
+
+### Chapter 17: Multi-Tenant Business Isolation
+
+Every core entity in Stockwise includes a foreign key `business_id` pointing to the `businesses` table:
+* Store owners own a `business` record.
+* All products, batches, stock movements, and employee profiles are keyed to that `business_id`.
+* Cross-tenant data leakage is structurally impossible at the database engine level via Row Level Security.
+
