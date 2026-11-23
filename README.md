@@ -1025,3 +1025,13 @@ Stockwise features a custom design engine supporting 7 full-app color palettes:
 * Changes propagate instantly across headers, bottom tabs, action buttons, chart curves, inputs, and modal accents.
 * Zero app restart required; updates execute smoothly at runtime.
 
+
+### Chapter 66: Classic Emerald Brand Theme Specifications
+
+The default signature Stockwise corporate identity:
+* Primary Background: `#F8FAFC` (Clean slate)
+* Primary Brand: `#16986C` (Vibrant Emerald)
+* Brand Dark Accent: `#0A241D` (Deep Forest)
+* Brand Glow: `#2CE5A7` (Mint Neon)
+* Surface Card: `#FFFFFF`
+
