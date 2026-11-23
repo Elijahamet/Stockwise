@@ -1004,3 +1004,9 @@ The inventory management screen provides instant multi-factor search:
 * Filter by category tabs or stock levels (All, Low Stock, Out of Stock).
 * Sort alphabetically, by price, by quantity, or by closest expiration date.
 
+
+### Chapter 63: Damaged Goods, Spoilage & Shrinkage Auditing
+
+* Tracks non-sale inventory losses with dedicated write-off reasons.
+* Allows store owners to identify high-spoilage vendors and protect retail profitability.
+
