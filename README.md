@@ -809,3 +809,11 @@ When an uncataloged barcode is scanned:
 3. The operator inputs the product name, cost price, selling price, and initial expiry date.
 4. The product is instantly added to the catalog and ready for immediate sale.
 
+
+### Chapter 38: Shelf-Life Calculations & Boundary Arithmetic
+
+Implemented in `src/utils/expiry.ts`:
+* Compares target expiration date against the current device date at midnight.
+* Millisecond differences are converted to exact calendar days remaining:
+  $$\text{Days Remaining} = \left\lfloor \frac{\text{Expiry Timestamp} - \text{Today Midnight}}{86,400,000} \right\rfloor$$
+
