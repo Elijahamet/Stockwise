@@ -1074,3 +1074,9 @@ The default signature Stockwise corporate identity:
 * Store owner accounts authenticate securely via Supabase Auth using industry-standard JWTs (JSON Web Tokens).
 * Supports email/password sign-in and automated password reset workflows.
 
+
+### Chapter 74: Token Storage & Session Lifecycle
+
+* Authentication tokens are cached securely in mobile client storage.
+* Sessions refresh automatically in the background when network connectivity is available.
+
