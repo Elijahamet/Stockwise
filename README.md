@@ -456,3 +456,13 @@ Welcome to the definitive documentation suite for Stockwise. This handbook conta
 79. [EAS Cloud Build & Android APK Generation Guide](#chapter-79-eas-cloud-build--android-apk-generation-guide)
 80. [Troubleshooting Runbook & Maintenance FAQ](#chapter-80-troubleshooting-runbook--maintenance-faq)
 
+
+### Chapter 1: Executive Summary & Problem Statement
+
+Retail inventory management in developing markets and independent brick-and-mortar storefronts suffers from three systemic vulnerabilities:
+1. **Unmonitored Product Spoilage:** Between 4% and 12% of perishable retail inventory is discarded annually due to undetected expiration dates hidden deep on back shelves.
+2. **Accidental Expiry Dispensation:** Staff inadvertently selling expired products, creating severe liability, regulatory fines, and public health risks.
+3. **Connectivity Fragility:** Cloud-only point-of-sale solutions fail completely during grid outages or unstable cellular internet connections, paralyzing daily retail operations.
+
+Stockwise addresses these root problems through an offline-first mobile architecture with embedded hardware optical scanning, batch-level shelf-life tracking, and transaction-time checkout safety barriers.
+
