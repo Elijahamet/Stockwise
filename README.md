@@ -768,3 +768,15 @@ Integrated via Expo's modern camera API (`expo-camera/CameraView`):
 * Active symbologies include UPC-A, UPC-E, EAN-13, EAN-8, Code 128, Code 39, and QR Codes.
 * Visual laser guide overlays indicate the optimum scan focal plane.
 
+
+### Chapter 33: Real-Time Barcode String Normalization
+
+Scanned strings are sanitized before querying:
+```typescript
+export function normalizeBarcode(raw: string): string {
+  if (!raw) return '';
+  return raw.trim().replace(/^0+/, ''); // normalizes leading zeros across differing scanner hardware
+}
+```
+Ensures consistent barcode identification regardless of whether an item was scanned via camera or external laser reader.
+
