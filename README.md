@@ -753,3 +753,10 @@ Push requests utilize PostgreSQL `UPSERT` (`INSERT ... ON CONFLICT DO UPDATE`):
 * Listens to NetInfo network state transitions.
 * When connectivity shifts from `offline` to `online`, the synchronization engine triggers automatically in the background without user intervention.
 
+
+### Chapter 31: Error Recovery & Exponential Retry Backoff
+
+If a network synchronization attempt fails due to temporary gateway timeouts (504) or rate limiting (429):
+* The sync worker enters an exponential backoff schedule: 2s, 4s, 8s, 16s, up to 60s.
+* Prevents battery drain and server spamming during prolonged outages.
+
