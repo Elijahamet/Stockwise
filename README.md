@@ -894,3 +894,9 @@ Stockwise supports the most common payment channels in modern commerce:
 * When Cash is selected, cashiers can tap quick-tender bills ($10, $20, $50, $100) or enter custom amounts.
 * The system computes customer change due immediately, reducing checkout calculation errors.
 
+
+### Chapter 49: Negative Stock Prevention & Quantity Locks
+
+* Cart steppers prevent incrementing item quantity beyond the verified on-hand inventory count.
+* Out-of-stock items (`quantity = 0`) display a greyed-out badge and cannot be added to the register cart.
+
