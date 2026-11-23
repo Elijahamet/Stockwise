@@ -958,3 +958,9 @@ When new stock arrives from suppliers:
 4. Enter received quantity and supplier vendor name.
 5. Tap **Save Batch**; total inventory increments immediately.
 
+
+### Chapter 57: Stock Recalculation & Movement Auditing
+
+* Total product stock is dynamically derived from the sum of its active batch quantities.
+* Every intake, sale, adjustment, or write-off automatically emits a ledger event to `stock_movements`.
+
