@@ -871,3 +871,11 @@ The checkout terminal (`src/app/(tabs)/sell.tsx`) provides an ergonomic register
 * Quantity increment and decrement steppers update line item totals in real time.
 * Cart state persists across screen switches so cashiers never lose pending transactions.
 
+
+### Chapter 46: Subtotal, Discount & Tax Calculation Engine
+
+* **Subtotal:** Sum of all line items (`unit_price * quantity`).
+* **Discount:** Optional flat amount or percentage discount applied at checkout.
+* **Net Total:** Computes final payable balance with zero rounding drift:
+  $$\text{Net Total} = \max(0, \text{Subtotal} - \text{Discount})$$
+
