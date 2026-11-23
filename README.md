@@ -1080,3 +1080,15 @@ The default signature Stockwise corporate identity:
 * Authentication tokens are cached securely in mobile client storage.
 * Sessions refresh automatically in the background when network connectivity is available.
 
+
+### Chapter 75: Role-Based Access: Owner, Manager, Cashier
+
+| Capability | Store Owner | Store Manager | Cashier |
+|---|:---:|:---:|:---:|
+| Ring Up Sales & Issue Receipts | ✅ | ✅ | ✅ |
+| Scan Barcodes & View Expiry Dates | ✅ | ✅ | ✅ |
+| Create New Products & Batches | ✅ | ✅ | ❌ |
+| Adjust Inventory & Write Off Stock | ✅ | ✅ | ❌ |
+| Manage Staff & Assign Roles | ✅ | ❌ | ❌ |
+| View Financial Revenue Reports | ✅ | ❌ | ❌ |
+
