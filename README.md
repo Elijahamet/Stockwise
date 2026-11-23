@@ -466,3 +466,12 @@ Retail inventory management in developing markets and independent brick-and-mort
 
 Stockwise addresses these root problems through an offline-first mobile architecture with embedded hardware optical scanning, batch-level shelf-life tracking, and transaction-time checkout safety barriers.
 
+
+### Chapter 2: Target Retail Verticals
+
+Stockwise is purpose-built for commercial sectors where date safety and fast turnover are critical:
+* **Community Pharmacies & Drugstores:** Strict regulatory oversight requires exact batch lot tracking, manufacturer date recording, and zero-tolerance expiry rules on pharmaceuticals.
+* **Grocery Stores & Mini-Marts:** High-frequency perishable stock (dairy, bread, canned foods, packaged beverages) requires rapid inventory turnover and dynamic 30-day early warning radar.
+* **Beauty, Cosmetic & Skincare Boutiques:** High-value serums, organic lotions, and makeup items with finite post-opening shelf lives.
+* **Specialty Food & Organic Provisions:** Small-batch imports, artisanal dairy, and perishable pantry essentials.
+
