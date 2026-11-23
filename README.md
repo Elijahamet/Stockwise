@@ -1043,3 +1043,9 @@ The default signature Stockwise corporate identity:
 * **Royal Purple:** Sophisticated luxury theme utilizing `#7C3AED` (Royal Amethyst) and `#5B21B6` (Velvet Violet).
 * **Sunburst Yellow:** Warm boutique palette using `#D97706` (Golden Honey) and `#B45309` (Amber Bronze).
 
+
+### Chapter 69: iOS 27 Liquid Glassmorphism System
+
+* Next-generation futuristic frosted aesthetic inspired by modern glassmorphism.
+* Uses translucent card surfaces (`rgba(255, 255, 255, 0.75)`), subtle acrylic borders (`rgba(255, 255, 255, 0.4)`), and neon cyan glowing focus accents (`#00F2FE`).
+
