@@ -964,3 +964,10 @@ When new stock arrives from suppliers:
 * Total product stock is dynamically derived from the sum of its active batch quantities.
 * Every intake, sale, adjustment, or write-off automatically emits a ledger event to `stock_movements`.
 
+
+### Chapter 58: Manual Stock Adjustments & Reason Codes
+
+When physical stock counts differ from system counts:
+* Managers can adjust on-hand quantities via **Adjust Stock**.
+* Requires selecting a mandatory reason code: `Inventory Count Correction`, `Damaged Goods`, `Internal Store Use`, or `Theft/Shrinkage`.
+
