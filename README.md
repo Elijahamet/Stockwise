@@ -582,3 +582,12 @@ Local data is segmented into dedicated isolated storage partitions:
 * `@stockwise_movements_v1`: Immutable stock audit trail tracking every unit decrement and increment.
 * `@stockwise_active_theme_v1`: User-selected theme identifier (`emerald`, `sea_blue`, `glass`, etc.).
 
+
+### Chapter 12: Reactive Data Flow & Propagation
+
+Stockwise eliminates stale screen bugs via React's unidirectional data flow:
+1. When a sale completes on the POS Checkout screen, `completeSale()` executes.
+2. The function generates an immutable sale receipt and decrements on-hand quantities across associated batches.
+3. Updated arrays are emitted to `AppContext`.
+4. React re-evaluates consumers: Dashboard revenue metrics, Inventory stock badges, and Low Stock alert counts update simultaneously without requiring screen refreshes.
+
