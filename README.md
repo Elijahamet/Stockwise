@@ -563,3 +563,12 @@ Stockwise employs a four-tier decoupled architectural hierarchy:
 * **Expo SDK 58 Architecture:** Built on the modern Continuous Native Generation (CNG) pipeline, eliminating legacy fragile `android/` and `ios/` folders.
 * **Hermes Bytecode Pre-compilation:** JavaScript files are ahead-of-time (AOT) compiled into optimized Hermes bytecode during the EAS cloud build, resulting in instant startup and minimal memory footprint.
 
+
+### Chapter 10: Client-Side State Machine & AppContext
+
+The global application state is governed by `AppContext.tsx`, operating as a deterministic state machine:
+* **Initialization (`IDLE` -> `LOADING`):** Reads offline storage keys in parallel on app boot.
+* **Hydration (`LOADING` -> `READY`):** Normalizes raw JSON records into typed entity arrays (`products`, `sales`, `batches`, `movements`).
+* **Active Mutations (`READY` -> `MUTATING`):** State transitions occur optimistically in memory, instantly notifying listeners before flushing asynchronously to disk.
+* **Sync Handshake (`READY` -> `SYNCING`):** Engages background worker when network socket connection is established.
+
