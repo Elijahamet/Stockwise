@@ -679,3 +679,13 @@ Transactions are split into header and detail tables:
 * `sales`: Records `receipt_number`, `subtotal`, `discount`, `total`, `payment_method` (`cash`, `momo`, `card`), `sold_by`, and transaction timestamp.
 * `sale_items`: Normalized line items containing `sale_id`, `product_id`, `unit_price`, `quantity`, and `subtotal`.
 
+
+### Chapter 22: Employee Access & Granular Permissions
+
+The `employees` and `profiles` tables govern access control:
+* **Roles:**
+  * `owner`: Complete administrative privileges, financial audits, staff deletion.
+  * `manager`: Catalog management, restock intake, inventory write-offs.
+  * `cashier`: Point of sale operations, receipt generation, barcode lookup.
+* Permissions can be toggled per account to enforce separation of duties.
+
