@@ -1018,3 +1018,10 @@ Future enterprise capabilities designed into the schema:
 * Inter-branch transfer requests and transit tracking.
 * Central warehouse distribution management.
 
+
+### Chapter 65: 7-Palette Reactive Theme Engine
+
+Stockwise features a custom design engine supporting 7 full-app color palettes:
+* Changes propagate instantly across headers, bottom tabs, action buttons, chart curves, inputs, and modal accents.
+* Zero app restart required; updates execute smoothly at runtime.
+
