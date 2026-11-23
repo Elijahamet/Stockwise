@@ -719,3 +719,10 @@ When a new store owner registers via Supabase Auth, an automated trigger execute
 2. Creates a default `business` record named after the store.
 3. Inserts an administrative `profile` record linking the user's UUID with `role = 'owner'`.
 
+
+### Chapter 26: Bidirectional Synchronization Engine
+
+Implemented in `src/services/supabaseSync.ts`:
+* **Pull Phase:** Queries Supabase for rows modified since `last_synced_at` and upserts them into local storage.
+* **Push Phase:** Inspects the local mutation log for unsynced changes and dispatches them via Supabase REST API batch endpoints.
+
