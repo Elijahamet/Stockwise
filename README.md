@@ -900,3 +900,13 @@ Stockwise supports the most common payment channels in modern commerce:
 * Cart steppers prevent incrementing item quantity beyond the verified on-hand inventory count.
 * Out-of-stock items (`quantity = 0`) display a greyed-out badge and cannot be added to the register cart.
 
+
+### Chapter 50: Digital Receipt Generation & Formatting
+
+Upon transaction completion, a digital receipt modal is generated containing:
+* Store name, address, and contact details.
+* Sequential receipt number (e.g. `REC-20261122-0042`).
+* Itemized line list with quantities and unit prices.
+* Subtotal, discounts, final total paid, and change returned.
+* Cashier name and transaction timestamp.
+
