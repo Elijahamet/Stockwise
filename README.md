@@ -1035,3 +1035,11 @@ The default signature Stockwise corporate identity:
 * Brand Glow: `#2CE5A7` (Mint Neon)
 * Surface Card: `#FFFFFF`
 
+
+### Chapter 67: Vibrant Palettes (Sea Blue, Sunset Orange, Royal Purple, Sunburst Yellow)
+
+* **Sea Blue:** Crisp oceanic theme featuring `#0284C7` (Sky Blue) and `#0369A1` (Deep Cerulean) designed for calm maritime aesthetics.
+* **Sunset Orange:** High-energy retail palette utilizing `#EA580C` (Tangerine) and `#C2410C` (Terracotta) for active sales environments.
+* **Royal Purple:** Sophisticated luxury theme utilizing `#7C3AED` (Royal Amethyst) and `#5B21B6` (Velvet Violet).
+* **Sunburst Yellow:** Warm boutique palette using `#D97706` (Golden Honey) and `#B45309` (Amber Bronze).
+
