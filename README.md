@@ -734,3 +734,10 @@ When internet access is unavailable:
 * Mutations are appended to an internal pending change set.
 * The application remains 100% interactive with zero spinner delays.
 
+
+### Chapter 28: Idempotent Batch Push Operations
+
+Push requests utilize PostgreSQL `UPSERT` (`INSERT ... ON CONFLICT DO UPDATE`):
+* Duplicate network submissions resulting from flaky connections will not create phantom duplicate inventory or double-count sales.
+* Unique transaction UUIDs ensure safe retry semantics.
+
