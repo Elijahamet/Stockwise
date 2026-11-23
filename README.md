@@ -863,3 +863,11 @@ Recommended standard operating procedure for retail staff:
 4. Filter by **Expired** (red) and physically remove listed items from the sales floor.
 5. Record write-offs in Stockwise to maintain accurate inventory balances.
 
+
+### Chapter 45: Digital Cash Register & Cart Lifecycle
+
+The checkout terminal (`src/app/(tabs)/sell.tsx`) provides an ergonomic register experience:
+* Operators can tap catalog items or scan barcodes to populate the cart.
+* Quantity increment and decrement steppers update line item totals in real time.
+* Cart state persists across screen switches so cashiers never lose pending transactions.
+
