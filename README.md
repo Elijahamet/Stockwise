@@ -572,3 +572,13 @@ The global application state is governed by `AppContext.tsx`, operating as a det
 * **Active Mutations (`READY` -> `MUTATING`):** State transitions occur optimistically in memory, instantly notifying listeners before flushing asynchronously to disk.
 * **Sync Handshake (`READY` -> `SYNCING`):** Engages background worker when network socket connection is established.
 
+
+### Chapter 11: Offline Storage Model with AsyncStorage
+
+Local data is segmented into dedicated isolated storage partitions:
+* `@stockwise_products_v1`: Master product catalog containing SKUs, barcodes, prices, and stock counts.
+* `@stockwise_batches_v1`: Batch-level lot tracking records with individual expiration dates.
+* `@stockwise_sales_v1`: Historical POS checkout receipts and item breakdowns.
+* `@stockwise_movements_v1`: Immutable stock audit trail tracking every unit decrement and increment.
+* `@stockwise_active_theme_v1`: User-selected theme identifier (`emerald`, `sea_blue`, `glass`, etc.).
+
