@@ -1092,3 +1092,9 @@ The default signature Stockwise corporate identity:
 | Manage Staff & Assign Roles | ✅ | ❌ | ❌ |
 | View Financial Revenue Reports | ✅ | ❌ | ❌ |
 
+
+### Chapter 76: Staff Onboarding & Permission Revocation
+
+* Store owners can invite staff members by assigning unique PINs and designating specific operational roles.
+* Access can be deactivated instantly from the Profile & Settings screen.
+
