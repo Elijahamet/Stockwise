@@ -741,3 +741,9 @@ Push requests utilize PostgreSQL `UPSERT` (`INSERT ... ON CONFLICT DO UPDATE`):
 * Duplicate network submissions resulting from flaky connections will not create phantom duplicate inventory or double-count sales.
 * Unique transaction UUIDs ensure safe retry semantics.
 
+
+### Chapter 29: Conflict Resolution & Last-Write-Wins Strategy
+
+* **Catalog Metadata:** Uses a **Last-Write-Wins (LWW)** strategy based on client vs server timestamps.
+* **Inventory Quantities:** Increments and decrements are computed relative to delta changes rather than absolute overwrites, preserving physical stock integrity.
+
