@@ -853,3 +853,13 @@ When a cashier attempts to add an expired item to the checkout cart:
 * Expired stock can be quarantined with a single tap via the "Write-Off Expired Stock" action.
 * Automatically deducts units from on-hand inventory and registers an immutable `expired_write_off` event in the stock movements ledger for accounting tax deductions.
 
+
+### Chapter 44: Daily Store Expiry Audit Checklist
+
+Recommended standard operating procedure for retail staff:
+1. Every morning, launch Stockwise and review the **Expiry Dashboard**.
+2. Filter inventory by **Expiring Soon** (yellow).
+3. Apply promotional discounts or move soon-to-expire items to front-of-shelf display.
+4. Filter by **Expired** (red) and physically remove listed items from the sales floor.
+5. Record write-offs in Stockwise to maintain accurate inventory balances.
+
