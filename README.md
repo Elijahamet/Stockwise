@@ -760,3 +760,11 @@ If a network synchronization attempt fails due to temporary gateway timeouts (50
 * The sync worker enters an exponential backoff schedule: 2s, 4s, 8s, 16s, up to 60s.
 * Prevents battery drain and server spamming during prolonged outages.
 
+
+### Chapter 32: CameraView Optical Hardware Configuration
+
+Integrated via Expo's modern camera API (`expo-camera/CameraView`):
+* Configured for portrait orientation scanning.
+* Active symbologies include UPC-A, UPC-E, EAN-13, EAN-8, Code 128, Code 39, and QR Codes.
+* Visual laser guide overlays indicate the optimum scan focal plane.
+
