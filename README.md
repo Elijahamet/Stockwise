@@ -726,3 +726,11 @@ Implemented in `src/services/supabaseSync.ts`:
 * **Pull Phase:** Queries Supabase for rows modified since `last_synced_at` and upserts them into local storage.
 * **Push Phase:** Inspects the local mutation log for unsynced changes and dispatches them via Supabase REST API batch endpoints.
 
+
+### Chapter 27: Local Action Queue & Event Buffering
+
+When internet access is unavailable:
+* All catalog additions, stock adjustments, and sales writes succeed immediately in local storage.
+* Mutations are appended to an internal pending change set.
+* The application remains 100% interactive with zero spinner delays.
+
