@@ -475,3 +475,14 @@ Stockwise is purpose-built for commercial sectors where date safety and fast tur
 * **Beauty, Cosmetic & Skincare Boutiques:** High-value serums, organic lotions, and makeup items with finite post-opening shelf lives.
 * **Specialty Food & Organic Provisions:** Small-batch imports, artisanal dairy, and perishable pantry essentials.
 
+
+### Chapter 3: Mobile POS vs Traditional Desktop Registers
+
+| Evaluation Metric | Traditional Desktop POS Systems | Stockwise Mobile-First Solution |
+|---|---|---|
+| **Hardware Capital Expenditure** | $1,200 – $3,500 for dedicated terminals | **$0.00** (runs on owner & staff smartphones) |
+| **Power Outage Resilience** | Requires bulky uninterruptible power supplies (UPS) | **100% resilient** using device battery power |
+| **Barcode Scanner Equipment** | Requires external USB/Bluetooth tethered hardware | **Built-in** smartphone camera optical scanner |
+| **Mobility & Stock Auditing** | Fixed to checkout counter | **Total mobility** — audit backroom shelves by hand |
+| **Software Licensing** | $60 – $200 recurring monthly SaaS fee | **Free Tier** open-source deployable model |
+
